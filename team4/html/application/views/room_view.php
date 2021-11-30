@@ -1,16 +1,11 @@
 <?
 	$ID=$row->ID;                                 // 사용자번호
-	$phone1 = trim(substr($row->phone,0,3));			// 전화 : 지역번호 추출
-	$phone2 = trim(substr($row->phone,3,4));			// 전화 : 국번호 추출
-	$phone3 = trim(substr($row->phone,7,4));			// 전화 : 번호 추출
-	$phone = $phone1 . "-" . $phone2 . "-" . $phone3;       // 합치기
-	$rank = $row->rank==0 ? "고객" : "관리자" ;     // 0->고객, 1->관리자
 
 	$tmp = $text1 ? "/ID/$ID/text1/$text1/page/$page" : "/ID/$ID/page/$page";
 ?>
 	<br>
 		<div class="my_container">
-			<div class="alert mycolor1" role="alert">사용자</div>
+			<div class="alert mycolor1" role="alert">방 목록</div>
 
 			<form name="form1" method="post" action="">
 				<table class="table table-bordered table-sm mymargin5">
@@ -18,25 +13,17 @@
 						<td width="20%" class="mycolor2" style="vertical-align:middle"> 번호</td>
 						<td width="80%" align="left"><?=$ID; ?></td>
 					</tr>
-					 <tr>
+					<tr>
 						<td width="20%" class="mycolor2" style="vertical-align:middle">
-							 아이디
+							 종류명
 						</td>
 						<td width="80%" align="left">
-							<?=$row->uid; ?>
+							<?=$row->roomType_name; ?>
 						</td>
 					</tr>
 					<tr>
 						<td width="20%" class="mycolor2" style="vertical-align:middle">
-							비밀번호
-						</td>
-						<td width="80%" align="left">
-							<?=$row->pwd; ?>
-						</td>
-					</tr>
-					<tr>
-						<td width="20%" class="mycolor2" style="vertical-align:middle">
-							 이름
+							 방이름
 						</td>
 						<td width="80%" align="left">
 							<?=$row->name; ?>
@@ -44,32 +31,49 @@
 					</tr>
 					<tr>
 						<td width="20%" class="mycolor2" style="vertical-align:middle">
-							 전화
+							 가격
 						</td>
 						<td width="80%" align="left">
-							<?=$phone; ?>
+							<?=number_format($row->price); ?>원
 						</td>
 					</tr>
 					<tr>
 						<td width="20%" class="mycolor2" style="vertical-align:middle">
-							이메일
+							 최대인원
 						</td>
 						<td width="80%" align="left">
-							<?=$row->email; ?>
+							<?=$row->people; ?>명
 						</td>
 					</tr>
 					<tr>
 						<td width="20%" class="mycolor2" style="vertical-align:middle">
-							등급
+							 설명
 						</td>
 						<td width="80%" align="left">
-							<?=$rank; ?>
+							<?=$row->tmi; ?>
+						</td>
+					</tr>
+					<tr>
+						<td width="20%" class="mycolor2" style="vertical-align:middle">
+							 사진
+						</td>
+						<td width="80%" align="left">
+					<div class="form-inline">
+					<b>파일이름</b> : <?=$row->pic?> <br>
+					</div>
+					<?
+						if ($row->pic)     // 이미지가 있는 경우
+							echo("<img src='/~team4/product_img/$row->pic' width='200’ class='img-fluid img-thumbnail'>");
+						else                   // 이미지가 없는 경우
+							echo("<img src='' width='200’ class='img-fluid img-thumbnail'>");
+					?>
+
 						</td>
 					</tr>
 				</table>
 				<div align="center">
-					<a href="/~team4/member/edit<?=$tmp; ?>" class="btn btn-sm mycolor1">수정</a>
-					<a href="/~team4/member/del<?=$tmp; ?>" class="btn btn-sm mycolor1" onClick="return confirm('삭제할까요?');">삭제</a> &nbsp;
+					<a href="/~team4/room/edit<?=$tmp; ?>" class="btn btn-sm mycolor1">수정</a>
+					<a href="/~team4/room/del<?=$tmp; ?>" class="btn btn-sm mycolor1" onClick="return confirm('삭제할까요?');">삭제</a> &nbsp;
 					<input type="button" value="이전화면으로" class="btn btn-sm mycolor1" onClick="history.back();">
 				</div>
 			</form>

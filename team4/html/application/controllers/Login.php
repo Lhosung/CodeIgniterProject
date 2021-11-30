@@ -1,25 +1,59 @@
 <?
-	// team 4 호텔
-	class Login extends CI_Controller {               // 클래스이름 첫 글자는 대문자
+    class Login extends CI_Controller {       // login클래스 선언
         function __construct()                           // 클래스생성할 때 초기설정
         {
             parent::__construct();
             $this->load->database();                     // 데이터베이스 연결
-            $this->load->model("login_m");    // 모델 Member_m 연결
+            $this->load->model("login_m");				// 모델 login_m 연결
+			$this->load->helper(array("url","date"));	// helper 선언
         }
-        public function index()                            // 제일 먼저 실행되는 함수
+		
+		public function index()                            // 제일 먼저 실행되는 함수
+		{
+            $this->loginForm();                     // loginForm 함수 호출
+        }
+		
+		public function loginForm()                      // 제일 먼저 실행되는 함수
+		{
+			$this->load->view("main_header");		// view폴더의 header.php 와
+			$this->load->view("loginForm");
+			$this->load->view("main_footer");		//  footer.php 호출
+		}
+	
+        public function check()
         {
-			 $this->load->view("main_header");                    // 상단출력(메뉴)
-            $this->load->view("loginForm");           // member_list에 자료전달
-            $this->load->view("main_footer");  
-            //$this->lists();                                        // list 함수 호출
-        }
-        public function lists()
-        {
-//            $data["list"] = $this->member_m->getlist();    // 자료읽어 data배열에 저장 
-          //  $this->load->view("main_header");                    // 상단출력(메뉴)
-           // $this->load->view("loginForm");           // member_list에 자료전달
-            //$this->load->view("main_footer");                      // 하단 출력 
-        }
+			$uid=$this->input->post("uid",TRUE);
+			$pwd=$this->input->post("pwd",TRUE);
+            
+			$row=$this->login_m->getrow($uid,$pwd);
+			if($row)
+			{
+				$data=array(
+					"uid"=>$row->uid,
+					"rank"=>$row->rank
+				);
+				$this->session->set_userdata($data);
+				
+
+				$this->load->view("main_header");
+				$this->load->view("index");
+				$this->load->view("main_footer");
+			}
+			else{
+				$this->load->view("main_header");
+				$this->load->view("loginForm");
+				$this->load->view("main_footer");
+			}
+		}
+
+		public function logout()
+		{
+			$data=array('uid','rank');
+			$this->session->unset_userdata($data);
+
+			$this->load->view("main_header");
+			$this->load->view("index");
+			$this->load->view("main_footer");
+		}
 	}
 ?>

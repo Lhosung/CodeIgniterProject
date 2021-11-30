@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -18,12 +18,12 @@
         <link rel="stylesheet" href="/~team4/my/css/responsive.css">
 
     </head>
-    <body>
+    <body style="background:aliceblue;">
         <header class="header_area">
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <!-- Brand and toggle get grouped for better mobile display -->
-                    <a class="navbar-brand logo_h" href="index.html"><img src="/~team4/my/image/Logo.png" alt=""></a>
+                    <a class="navbar-brand logo_h" href="/~team4/main"><img src="/~team4/my/image/Logo.png" alt=""></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -32,20 +32,33 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li> 
-                            <li class="nav-item"><a class="nav-link" href="about.html">About us</a></li>
-                            <li class="nav-item"><a class="nav-link" href="accomodation.html">Accomodation</a></li>
-                            <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="/~team4/main">메인</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/~team4/about">리조트 소개</a></li>
+							<li class="nav-item"><a class="nav-link" href="/~team4/contact">직원 소개</a></li>
+                            <li class="nav-item"><a class="nav-link" href="accomodation.html">예약</a></li>
                             <li class="nav-item submenu dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Social</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="blog-single.html">Blog Details</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="blog.html">갤러리</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="blog-single.html">리뷰</a></li>
                                 </ul>
-                            </li> 
-                            <li class="nav-item"><a class="nav-link" href="elements.html">Elemests</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/~team4/admin">Admin</a></li>
+                            </li>
+<?
+	if (!$this->session->userdata("uid")) {
+		echo("<li class='nav-item'><a class='nav-link' href='/~team4/login'>로그인</a></li>
+		<li class='nav-item'><a class='nav-link' href='/~team4/register'>회원가입</a></li>"); 
+	}	
+	else {
+		echo("<li class='nav-item'><a class='nav-link' href='/~team4/member/myPage'>내 정보</a></li>
+		<li class='nav-item'><a class='nav-link' href='/~team4/login/logout'>로그아웃</a></li>");
+	}
+?>
+                            
+<?
+	if ($this->session->userdata("rank")==1)
+		echo("<li class='nav-item'><a class='nav-link' href='/~team4/admin'>Admin</a></li>");
+?>
+
                         </ul>
                     </div> 
                 </nav>

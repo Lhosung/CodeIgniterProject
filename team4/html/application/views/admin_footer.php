@@ -1,4 +1,5 @@
-            <!-- Footer -->
+<br>
+			<!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
@@ -39,7 +40,7 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="/~team4/my/admin/vendor/jquery/jquery.min.js"></script>
+  
     <script src="/~team4/my/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->

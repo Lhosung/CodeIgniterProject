@@ -4,9 +4,9 @@
         public function getlist($text1,$start,$limit)
         {    
 			if (!$text1)
-				$sql="select * from member order by name limit $start,$limit";    // 전체 자료
+				$sql="select * from member order by ID asc limit $start,$limit";    // 전체 자료
 			else
-				$sql="select * from member where name like '%$text1%' order by name limit $start,$limit";
+				$sql="select * from member where name like '%$text1%' order by ID asc limit $start,$limit";
 
             return $this->db->query($sql)->result();       // 쿼리실행, 결과 리턴
         }
@@ -24,6 +24,12 @@
 		function getrow($ID) 
 		{
 			$sql="select * from member where ID=$ID";
+			return  $this->db->query($sql)->row();
+		}
+
+		function getMyInfo($uid) 
+		{
+			$sql="select * from member where uid=$uid";	// 조인 할 거 개많음
 			return  $this->db->query($sql)->row();
 		}
 

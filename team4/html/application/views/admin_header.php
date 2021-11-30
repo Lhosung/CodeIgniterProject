@@ -22,6 +22,13 @@
 	
     <link href="/~team4/my/admin/css/my.css" rel="stylesheet">
 
+	<!-- datepicker style 날짜관련-->
+	<script src="/~team4/my/admin/vendor/jquery/jquery.min.js"></script>
+ 	<script src="/~team4/my/admin/js/moment-with-locales.min.js"> </script>
+	<script src="/~team4/my/admin/js/bootstrap-datetimepicker.js"></script>
+	<link href="/~team4/my/admin/css/bootstrap-datetimepicker.css" rel="stylesheet">
+	<link href="/~team4/my/admin/css/fontawesome-all.min.css" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -47,14 +54,15 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/~team4/admin">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>관리자 메인</span></a>
+                    <span>관리자 메인</span>
+				</a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
-            <div class="sidebar-heading">
+            <div class="sidebar-heading" style="align-self:center; font-size: 16px; color: white">
                 메뉴
             </div>
 
@@ -77,15 +85,15 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Categories :</h6>
-                        <a class="collapse-item" href="utilities-color.html">방 종류</a>
-                        <a class="collapse-item" href="utilities-border.html">방 정보</a>
+                        <a class="collapse-item" href="/~team4/roomType">방 종류</a>
+                        <a class="collapse-item" href="/~team4/room">방 정보</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - BOOK Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/~team4/book">
                     <i class="fas fa-fw fa-calendar"></i>
                     <span>BOOK</span>
                 </a>
@@ -102,8 +110,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Categories :</h6>
-                        <a class="collapse-item" href="utilities-color.html">Gallery Category</a>
-                        <a class="collapse-item" href="utilities-border.html">Gallery</a>
+                        <a class="collapse-item" href="/~team4/category">Gallery Category</a>
+                        <a class="collapse-item" href="/~team4/gallery">Gallery</a>
                     </div>
                 </div>
             </li>
@@ -132,47 +140,10 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
-					<form name="form1" method="post" action="" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-						<div class="input-group">
-							<input type="text" name="text1" class="form-control bg-light border-0 small" placeholder="Search for..."
-								aria-label="Search" aria-describedby="basic-addon2">
-							<div class="input-group-append">
-								<button class="btn btn-primary" type="button">
-									<i class="fas fa-search fa-sm"></i>
-								</button>
-							</div>
-						</div>
-					</form>
+                    
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-                        
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -198,8 +169,6 @@
                                 </a>
                             </div>
                         </li>
-
                     </ul>
-
                 </nav>
                 <!-- End of Topbar -->
