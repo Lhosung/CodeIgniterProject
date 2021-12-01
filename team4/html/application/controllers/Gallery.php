@@ -8,6 +8,7 @@
 			$this->load->helper(array("url","date"));	// helper 선언
 			$this->load->library("pagination");			// pagination 선언
 			$this->load->library('upload');
+			$this->load->library('image_lib');
         }
 
         public function index()                            // 제일 먼저 실행되는 함수
@@ -43,21 +44,11 @@
 			$data["text1"]=$text1;                      // text1 값 전달을 위한 처리
             $data["list"]=$this->gallery_m->getlist($text1,$start,$limit);   // 해당페이지 자료읽기
 
-            $this->load->view("main_header");                    // 상단출력(메뉴)
+            $this->load->view("admin_header");                    // 상단출력(메뉴)
             $this->load->view("gallery_list",$data);           // gallery_list에 자료전달
-            $this->load->view("main_footer");                      // 하단 출력 
+            $this->load->view("admin_footer");                      // 하단 출력 
         }
 
-		public function zoom()
-		{
-			$uri_array=$this->uri->uri_to_assoc(3);
-			$data["iname"] = array_key_exists("iname",$uri_array) ? urldecode($uri_array["iname"]) : "" ;
-			$data["pname"] = array_key_exists("pname",$uri_array) ? urldecode($uri_array["pname"]) : "" ;
-
-			$this->load->view("main_header_nomenu");                    // 상단출력(메뉴)
-            $this->load->view("gallery_zoom",$data);           // gallery_list에 자료전달
-            $this->load->view("main_footer");                      // 하단 출력 
-		}
 		public function view()
         {
 			$uri_array=$this->uri->uri_to_assoc(3);
@@ -93,14 +84,13 @@
 			$page = array_key_exists("page",$uri_array) ? "/page/" . urldecode($uri_array["page"]) : "" ;
 
 			$this->load->library("form_validation"); // 라이브러리 등록
-			$this->form_validation->set_rules("gallerytypeId","방종류","required");
-			$this->form_validation->set_rules("name","이름","required|max_length[50]");
-			$this->form_validation->set_rules("price","단가","required|numeric");
+			$this->form_validation->set_rules("categoryId","카테고리","required");
+			$this->form_validation->set_rules("pic","사진","required|max_length[50]");
 
 
 			if ($this->form_validation->run()==FALSE ) // 목록화면의 추가버튼 클릭한 경우
 			{
-				$data["list"] = $this->gallery_m->getlist_galleryType();
+				$data["list"] = $this->gallery_m->getlist_category();
 				$this->load->view("admin_header");
 				$this->load->view("gallery_add", $data);    // 입력화면 표시
 				$this->load->view("admin_footer");
@@ -108,11 +98,8 @@
 			else              // 입력화면의 저장버튼 클릭한 경우
 			{
 				$data=array(
-					"gallerytypeId" => $this->input->post("gallerytypeId",TRUE),
-					"name" => $this->input->post("name",TRUE),
-					"price" => $this->input->post("price",TRUE),
-					"people" => $this->input->post("people",TRUE),
-					"tmi" => $this->input->post("tmi",TRUE)
+					"categoryId" => $this->input->post("categoryId",TRUE),
+					"name" => $this->input->post("name",TRUE)
 				);
 				$picname = $this->call_upload();
 				if($picname) $data["pic"] = $picname;
@@ -130,13 +117,12 @@
 			$page = array_key_exists("page",$uri_array) ? "/page/" . urldecode($uri_array["page"]) : "" ;
 
 			$this->load->library("form_validation"); // 라이브러리 등록
-			$this->form_validation->set_rules("gallerytypeId","방종류","required");
-			$this->form_validation->set_rules("name","이름","required|max_length[50]");
-			$this->form_validation->set_rules("price","단가","required|numeric");
+			$this->form_validation->set_rules("categoryId","카테고리 이름","required");
+			$this->form_validation->set_rules("pic","사진","required|max_length[50]");
 
 			if ( $this->form_validation->run()==FALSE )     // 수정버튼 클릭한 경우
 			{
-				$data["list"] = $this->gallery_m->getlist_galleryType();
+				$data["list"] = $this->gallery_m->getlist_category();
 				$this->load->view("admin_header");
 				$data["row"]=$this->gallery_m->getrow($ID);
 				$this->load->view("gallery_edit",$data);
@@ -145,11 +131,8 @@
 			else                                                                   // 저장버튼 클릭한 경우
 			{  
 				$data=array(
-					"gallerytypeId" => $this->input->post("gallerytypeId",TRUE),
-					"name" => $this->input->post("name",TRUE),
-					"price" => $this->input->post("price",TRUE),
-					"people" => $this->input->post("people",TRUE),
-					"tmi" => $this->input->post("tmi",TRUE)
+					"categoryId" => $this->input->post("categoryId",TRUE),
+					"name" => $this->input->post("name",TRUE)
 				);
 				$picname = $this->call_upload();
 				if($picname) $data["pic"] = $picname;
@@ -161,7 +144,7 @@
 
 		public function call_upload()
 		{
-			$config['upload_path']	= './product_img';
+			$config['upload_path']	= './gallery_img';
 			$config['allowed_types']	= 'gif|jpg|png'; 
 			$config['overwrite']	= TRUE; 
 			$config['max_size'] = 100000000;
@@ -175,9 +158,9 @@
 				$picname=$this->upload->data("file_name");
 
 				$config['image_library'] = 'gd2';
-				$config['source_image'] = './product_img/' . $picname;
+				$config['source_image'] = './gallery_img/' . $picname;
 				$config['thumb_marker'] = '';
-				$config['new_image'] = './product_img/thumb';
+				$config['new_image'] = './gallery_img/thumb';
 				$config['create_thumb'] = TRUE;
 				$config['maintain_ratio'] = TRUE;
 				$config['width'] = 200;
@@ -187,6 +170,17 @@
 				$this->image_lib->resize();
 			}
 			return $picname;
+		}
+
+		public function zoom()
+		{
+			$uri_array=$this->uri->uri_to_assoc(3);
+			$data["iname"] = array_key_exists("iname",$uri_array) ? urldecode($uri_array["iname"]) : "" ;
+			$data["pname"] = array_key_exists("pname",$uri_array) ? urldecode($uri_array["pname"]) : "" ;
+
+			$this->load->view("admin_header_nomenu");                    // 상단출력(메뉴)
+            $this->load->view("gallery_zoom",$data);           // gallery_list에 자료전달
+            $this->load->view("admin_footer");                      // 하단 출력 
 		}
     }
 ?>

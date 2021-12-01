@@ -37,7 +37,7 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['form_validation_required']		= '{field} 가 필요합니다.';
+$lang['form_validation_required']		= '{field} (이)가 필요합니다.';
 $lang['form_validation_isset']			= '{field}에 값이 있어야합니다.';
 $lang['form_validation_valid_email']		= '{field}에는 올바른 이메일 주소가 포함되어야 합니다.';
 $lang['form_validation_valid_emails']		= 'The {field} field must contain all valid email addresses.';

@@ -1,24 +1,20 @@
-		<br>
-        <div class="alert mycolor1" role="alert">제품 사진</div>
+	<br>
+	<div class="my_container">
+        <div class="alert mycolor1" role="alert">갤러리 사진</div>
 <script>
     function find_text()
 	{
 		if (!form1.text1.value)					// 값이 없는 경우, 전체 자료
-			form1.action="/~sale27/gallery/lists/page";
+			form1.action="/~team4/gallery/lists/page";
 		else                                    // 값이 있는 경우, text1 값 전달
-			form1.action="/~sale27/gallery/lists/text1/" + form1.text1.value + "/page";
+			form1.action="/~team4/gallery/lists/text1/" + form1.text1.value + "/page";
 		form1.submit();
 	}
 
-	function zoomimage(iname, pname)
-	{
-		w=window.open("/~sale27/gallery/zoom/iname/" + iname + "/pname/" + pname,
-			"imageview", "resizable=yes, scrollbars=yes, status=no, width=800, height=600");
-		w.focus();
-	}
-
 </script>
-
+<?
+	$tmp = $text1 ? "/text1/$text1/page/$page" : "/page/$page";
+?>
         <form name="form1" method="post" action="">
             <div class="row">
                 <div class="col-6" align="left">            
@@ -33,27 +29,32 @@
                     </div>
                 </div>
                 <div class="col-6" align="right">
+					<a href="/~team4/gallery/add<?=$tmp;?>" class="btn btn-primary">사진 추가</a>
                 </div>
             </div>
+
         </form>
 
-			<div class="row">			
+
+		<div class="row">			
 <?
     foreach ($list as $row)                             // 연관배열 list를 row를 통해 출력한다.
     {
-        $iname=$row->pic27 ? $row->pic27 : "";                       
-		$pname=$row->name27;
+		$ID=$row->ID;
+        $iname=$row->pic ? $row->pic : "";                       
+		$pname=$row->name;
 ?>
-				<div class="col-3">
-					<div class="mythumb_box">
-						<a href="javascript:zoomimage('<?=$iname; ?>', '<?=$pname; ?>');">
-							<img class="mythumb_image" src="/~sale27/product_img/thumb/<?=$iname; ?>" />
-						</a>
-						<div class="mythumb_text"><?=$pname; ?></div>
-					</div>
+			<div class="col-3">
+				<div class="mythumb_box">
+					<a href="/~team4/gallery/view/ID/<?=$ID ;?><?=$tmp; ?>">
+						<img class="mythumb_image" src="/~team4/gallery_img/thumb/<?=$iname; ?>" />
+					</a>
+					<div class="bg-primary text-white"><?=$pname; ?></div>
 				</div>
+			</div>
 <?
     }
 ?>
-			</div>
+		</div>
+	</div>
 <?=$pagination; ?>

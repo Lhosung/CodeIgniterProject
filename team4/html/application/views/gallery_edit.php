@@ -6,20 +6,19 @@
 				<table class="table table-bordered table-sm mymargin5">
 					<tr>
 						<td width="20%" class="mycolor2" style="vertical-align:middle">
-							카테고리 선택(필수)
+							카테고리 선택
 						</td>
 						<td width="80%" align="left">
 							<div class="form-inline">
 								<select name="categoryId" class="form-control-form-control-sm">
 									<option value="">선택하세요</option>
 <?
-	$categoryId=set_value("categoryId");
-	foreach ($list as $row)
+	foreach ($list as $row1)
 	{
-		if ($row->ID==$categoryId)
-			echo("<option value='$row->ID' selected>$row->name</option>");
+		if ($row->categoryId==$row1->ID)
+			echo("<option value='$row1->ID' selected>$row1->name</option>");
 		else
-			echo("<option value='$row->ID'> $row->name</option>");
+			echo("<option value='$row1->ID'> $row1->name</option>");
 	}
 ?>
 								</select>
@@ -29,21 +28,28 @@
 					</tr>
 					<tr>
 						<td width="20%" class="mycolor2" style="vertical-align:middle">
-							 이름
+							 이름(필수)
 						</td>
 						<td width="80%" align="right">
 							<div class="form-inline">
-								<input type="text" name="name" value="<?=set_value("name"); ?>" class="form-control form-control-sm" size="20" maxlength="20" />
+								<input type="text" name="name" value="<?=$row->name; ?>" class="form-control form-control-sm" size="20" maxlength="20" />
 							</div>
+							<? if (form_error("name")==true) echo form_error("name"); ?>
 						</td>
 					</tr>
 					<tr>
-						<td width="20%" class="mycolor2" style="vertical-align:middle">사진 추가(필수)</td>
+						<td width="20%" class="mycolor2" style="vertical-align:middle"> 사진 </td>
 						<td width="80%" align="left">
 							<div class="form-inline">
-								<input type="file" name="pic" value="" class="form-control form-control-sm" />
+								<b>파일이름</b> : <?=$row->pic; ?> <br>
+								<input type="file" name="pic" value="" class="form-control form-control-sm" >
 							</div>
-							<? if (form_error("pic")==true) echo form_error("pic"); ?>
+<?
+	if ($row->pic)     // 이미지가 있는 경우
+		echo("<img src='/~team4/gallery_img/$row->pic' width='200' class='img-fluid img-thumbnail'>");
+	else                   // 이미지가 없는 경우
+		echo("<img src='' width='200' class='img-fluid img-thumbnail'>");
+?>
 						</td>
 					</tr>
 				</table>

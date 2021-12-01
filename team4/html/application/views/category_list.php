@@ -152,6 +152,11 @@
 
 			$(document).on('click', '.ajax_edit', function(){
 				$("#collapseExample").collapse('hide');
+				$("#collapseExampleEdit").collapse('show');
+				
+				if($('#edit_ID').val() == $(this).data('id')) {
+					$('.collapse.show').collapse('hide');
+				}
 				$('#edit_ID').val($(this).data('id'));
 				$('#edit_name').val($(this).data('name'));
 			});
@@ -204,7 +209,7 @@
 				<tbody>
 					<tr id="rowno<?=$ID; ?>">
 						<td><?=$ID; ?></td>
-						<td><a href="#collapseExampleEdit" data-toggle="collapse" class="ajax_edit" aria-expanded="false" aria-controls="collapseExampleEdit" data-id="<?=$ID; ?>" data-name="<?=$row->name; ?>"><?=$row->name; ?></a></a></td>
+						<td><a href="#collapseExampleEdit" class="ajax_edit" aria-expanded="false" aria-controls="collapseExampleEdit" data-id="<?=$ID; ?>" data-name="<?=$row->name; ?>"><?=$row->name; ?></a></a></td>
 						<td><a href="#" rowno="<?=$ID; ?>" class="ajax_del btn btn-sm mycolor1">삭제</a></td>
 					</tr>
 				</tbody>

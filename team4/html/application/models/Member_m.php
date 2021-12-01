@@ -21,7 +21,7 @@
 			return $this->db->query($sql)->num_rows();
 		}
 
-		function getrow($ID) 
+		function getrow($ID)
 		{
 			$sql="select * from member where ID=$ID";
 			return  $this->db->query($sql)->row();
