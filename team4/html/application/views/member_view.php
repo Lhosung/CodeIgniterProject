@@ -18,7 +18,7 @@
 						<td width="20%" class="mycolor2" style="vertical-align:middle"> 번호</td>
 						<td width="80%" align="left"><?=$ID; ?></td>
 					</tr>
-					 <tr>
+					<tr>
 						<td width="20%" class="mycolor2" style="vertical-align:middle">
 							 아이디
 						</td>

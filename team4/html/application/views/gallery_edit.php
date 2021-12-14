@@ -1,12 +1,12 @@
         <br>
 		<div class="my_container">
-			<div class="alert mycolor1" role="alert">사진 추가</div>
+			<div class="alert mycolor1" role="alert">갤러리 수정</div>
 
 			<form name="form1" method="post" action="" enctype="multipart/form-data">
 				<table class="table table-bordered table-sm mymargin5">
 					<tr>
 						<td width="20%" class="mycolor2" style="vertical-align:middle">
-							카테고리 선택
+							카테고리 선택(필수)
 						</td>
 						<td width="80%" align="left">
 							<div class="form-inline">
@@ -28,13 +28,12 @@
 					</tr>
 					<tr>
 						<td width="20%" class="mycolor2" style="vertical-align:middle">
-							 이름(필수)
+							 이름
 						</td>
 						<td width="80%" align="right">
 							<div class="form-inline">
 								<input type="text" name="name" value="<?=$row->name; ?>" class="form-control form-control-sm" size="20" maxlength="20" />
 							</div>
-							<? if (form_error("name")==true) echo form_error("name"); ?>
 						</td>
 					</tr>
 					<tr>
@@ -42,7 +41,7 @@
 						<td width="80%" align="left">
 							<div class="form-inline">
 								<b>파일이름</b> : <?=$row->pic; ?> <br>
-								<input type="file" name="pic" value="" class="form-control form-control-sm" >
+								<input type="file" name="pic" value="<?=$row->pic; ?>" class="form-control form-control-sm" />
 							</div>
 <?
 	if ($row->pic)     // 이미지가 있는 경우

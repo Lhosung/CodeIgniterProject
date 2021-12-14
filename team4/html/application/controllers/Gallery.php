@@ -7,11 +7,11 @@
             $this->load->model("gallery_m");				// 모델 gallery_m 연결
 			$this->load->helper(array("url","date"));	// helper 선언
 			$this->load->library("pagination");			// pagination 선언
-			$this->load->library('upload');
+			$this->load->library('upload');				// 사진 업로드 선언
 			$this->load->library('image_lib');
         }
 
-        public function index()                            // 제일 먼저 실행되는 함수
+        public function index()                            // 제일	 먼저 실행되는 함수
         {
             $this->lists();                                        // list 함수 호출
         }
@@ -20,13 +20,14 @@
         {
 			$uri_array=$this->uri->uri_to_assoc(3);
 		    $text1 = array_key_exists("text1",$uri_array) ? urldecode($uri_array["text1"]) : "" ;
+			$page = array_key_exists("page",$uri_array) ? urldecode($uri_array["page"]) : "" ;
 
 		 	if ($text1=="") 
 				$base_url = "/gallery/lists/page";				  //$page_segment = 4;
 			else
 				$base_url = "/gallery/lists/text1/$text1/page";    // $page_segment = 6;
 			$page_segment = substr_count( substr($base_url,0,strpos($base_url,"page")) , "/" )+1;
-			$base_url = "/~sale27" . $base_url;
+			$base_url = "/~team4" . $base_url;
 
 
 			$config["per_page"]	 = 10;                              // 페이지당 표시할 line 수
@@ -42,6 +43,7 @@
 			$limit=$config["per_page"];        // 페이지 당 라인수
 			
 			$data["text1"]=$text1;                      // text1 값 전달을 위한 처리
+			$data["list_category"]=$this->gallery_m->getlist_category();
             $data["list"]=$this->gallery_m->getlist($text1,$start,$limit);   // 해당페이지 자료읽기
 
             $this->load->view("admin_header");                    // 상단출력(메뉴)
@@ -85,8 +87,6 @@
 
 			$this->load->library("form_validation"); // 라이브러리 등록
 			$this->form_validation->set_rules("categoryId","카테고리","required");
-			$this->form_validation->set_rules("pic","사진","required|max_length[50]");
-
 
 			if ($this->form_validation->run()==FALSE ) // 목록화면의 추가버튼 클릭한 경우
 			{
@@ -118,7 +118,6 @@
 
 			$this->load->library("form_validation"); // 라이브러리 등록
 			$this->form_validation->set_rules("categoryId","카테고리 이름","required");
-			$this->form_validation->set_rules("pic","사진","required|max_length[50]");
 
 			if ( $this->form_validation->run()==FALSE )     // 수정버튼 클릭한 경우
 			{
@@ -178,9 +177,42 @@
 			$data["iname"] = array_key_exists("iname",$uri_array) ? urldecode($uri_array["iname"]) : "" ;
 			$data["pname"] = array_key_exists("pname",$uri_array) ? urldecode($uri_array["pname"]) : "" ;
 
-			$this->load->view("admin_header_nomenu");                    // 상단출력(메뉴)
-            $this->load->view("gallery_zoom",$data);           // gallery_list에 자료전달
+			$this->load->view("admin_header_nomenu");               // 상단출력(메뉴)
+            $this->load->view("gallery_zoom",$data);				// gallery_zoom에 자료전달
             $this->load->view("admin_footer");                      // 하단 출력 
+		}
+
+		public function user()
+		{
+			$uri_array=$this->uri->uri_to_assoc(3);
+		    $text1 = array_key_exists("text1",$uri_array) ? urldecode($uri_array["text1"]) : "" ;
+
+		 	if ($text1=="")
+				$base_url = "/gallery/user";				  //$page_segment = 4;
+			else
+				$base_url = "/gallery/user/text1/$text1";    // $page_segment = 6;
+			$page_segment = substr_count( substr($base_url,0,strpos($base_url,"page")) , "/" )+1;
+			$base_url = "/~team4" . $base_url;
+
+
+			$config["per_page"]	 = 10;                              // 페이지당 표시할 line 수
+			$config["total_rows"] = $this->gallery_m->rowcount($text1);  // 전체 레코드개수 구하기
+			$config["uri_segment"] = $page_segment;		 // 페이지가 있는 segment 위치
+			$config["base_url"]	 = $base_url;                // 기본 URL
+			$this->pagination->initialize($config);           // pagination 설정 적용
+	
+			$data["page"]=$this->uri->segment($page_segment,0);  // 시작위치, 없으면 0.
+			$data["pagination"] = $this->pagination->create_links();  // 페이지소스 생성
+			
+			$start=$data["page"];                 // n페이지 : 시작위치
+			$limit=$config["per_page"];        // 페이지 당 라인수
+			
+			$data["text1"]=$text1;                      // text1 값 전달을 위한 처리
+			$data["category"] = $this->gallery_m->getlist_category();
+            $data["list"]=$this->gallery_m->gallery_list($text1);   // 해당페이지 자료읽기
+          
+            $this->load->view("galleryUser",$data);           // gallery_list에 자료전달
+
 		}
     }
 ?>

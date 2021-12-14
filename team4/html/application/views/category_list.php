@@ -10,156 +10,6 @@
 			form1.action="/~team4/category/lists/text1/" + form1.text1.value + "/page";
 		form1.submit();
 	}
-
-			$(function(){
-				/**
-                    add (click)
-                 */
-                $("#ajax_add").click(function(){                // 저장버튼 클릭 시 호출
-					var name=$("#add_name").val();              // add_name 입력란에 입력한 값
-					$.ajax({                                    // ajax 함수 호출
-						url:"/~team4/category/ajax_insert",     // Category.php의 ajax_insert 함수 호출 // 실행할 문서
-						type:"POST",                            // 값 전송방식
-						data:{                                  // 전송할 값들
-							"name":name
-						},
-						dataType:"text",                        // return 결과값의 데이터형식
-						complete:function(xhr, textStatus){     // 처리 완료 후
-                        var ID = xhr.responseText;          	// ajax_insert에서 return 된 ID값	// 처리 후, return 값
-
-							$("#dataTable").append(             // 테이블(dataTable)에 추가
-								"<tr id='rowno"+ID+"'>"+
-								"	<td>" + ID + "</td>"+
-								"	<td><a href='#collapseExampleEdit' data-toggle='collapse' class='ajax_edit' aria-expanded='false' aria-controls='collapseExampleEdit' data-id='"+
-								ID+"' data-name='"+name+"'>"+name+"</a></td>"+
-								"	<td><a href='#' rowno='"+ID+"' class='ajax_del btn btn-sm mycolor1'>삭제</a></td>"+
-								"</tr>");
-						}
-					});
-					$("#collapseExample").collapse('hide');
-				});
-
-				/**
-                    add (enter)
-                 */
-				$("#add_name").keyup(function(key){
-					if(key.keyCode == 13){
-						var name=$("#add_name").val();
-						$.ajax({
-							url:"/~team4/category/ajax_insert",
-							type:"POST",
-							data:{
-								"name":name
-							},
-							dataType:"text",
-							complete:function(xhr, textStatus){
-								var ID = xhr.responseText;
-								$("#dataTable").append(
-									"<tr id='rowno"+ID+"'>"+
-									"	<td style='vertical-align:middle;'>"+ID+"</td>"+
-									"	<td style='vertical-align:middle;'><a href='#collapseExampleEdit' data-toggle='collapse' class='ajax_edit' aria-expanded='false' aria-controls='collapseExampleEdit' data-id='"+
-									ID+"' data-name='"+name+"'>"+name+"</a></td>"+
-									"	<td><a href='#' rowno='"+ID+"' class='ajax_del btn btn-sm mycolor1'>삭제</a></td>"+
-									"</tr>");
-							}
-						});
-						$("#collapseExample").collapse('hide');
-					}
-				});
-
-				/**
-                    edit (click)
-                */
-				$("#ajax_edit").click(function(){
-					var ID = $("#edit_ID").val();
-					var name = $("#edit_name").val();
-					$.ajax({
-					url:"/~team4/category/ajax_update",
-					type:"POST",
-					data:{
-						"ID":ID,
-						"name":name
-					},
-					dataType:"html",
-					complete:function(xhr, textStatus){
-						$('#rowno'+ID).replaceWith(
-							"<tr id='rowno"+ID+"'>"+
-							"	<td style='vertical-align:middle;'>"+ID+"</td>"+
-							"	<td style='vertical-align:middle;'><a href='#collapseExampleEdit' data-toggle='collapse' class='ajax_edit' aria-expanded='false' aria-controls='collapseExampleEdit' data-id='"+
-							ID+"' data-name='"+name+"'>"+name+"</a></td>"+
-							"	<td><a href='#' rowno='"+ID+"' class='ajax_del btn btn-sm mycolor1'>삭제</a></td>"+
-							"</tr>");
-					}
-					});
-					$("#collapseExampleEdit").collapse('hide');
-				});
-
-				
-
-	            /**
-                    edit (enter)
-                */
-				$("#edit_name").keyup(function(event){
-					if(event.keyCode == 13){
-						var ID = $("#edit_ID").val();
-						var name = $("#edit_name").val();
-						$.ajax({
-							url:"/~team4/category/ajax_update",
-							type:"POST",
-							data:{
-								"ID":ID,
-								"name":name
-							},
-							dataType:"html",
-							complete:function(xhr, textStatus){
-								$('#rowno'+ID).replaceWith(
-									"<tr id='rowno"+ ID +"'>"+
-									"	<td style='vertical-align:middle;'>"+ ID +"</td>"+
-									"	<td style='vertical-align:middle;'><a href='#collapseExampleEdit' data-toggle='collapse' class='ajax_edit' aria-expanded='false' aria-controls='collapseExampleEdit' data-id='"+
-									ID +"' data-name='"+name+"'>"+name+"</a></td>"+
-									"	<td><a href='#' rowno='"+ ID +"' class='ajax_del btn btn-sm mycolor1'>삭제</a></td>"+
-									"</tr>");
-							}
-						});
-						$("#collapseExampleEdit").collapse('hide');
-					}
-				});
-        
-                /**
-                    delete (click)
-                */
-				$("#dataTable").on("click",".ajax_del",function(){
-					if(confirm("삭제할까요?")){
-							ID = $(this).attr("rowno");
-							$.ajax({
-							url:"/~team4/category/ajax_delete",
-							type:"POST",
-							data:{
-								"ID":ID,
-							},
-							dataType:"text",
-							complete:function(xhr, textStatus){
-								$('#rowno' + ID).remove();
-							}
-						});
-					}
-				});
-			});
-
-			$(document).on('click', '.ajax_add', function(){
-				$("#collapseExampleEdit").collapse('hide');
-			});
-
-			$(document).on('click', '.ajax_edit', function(){
-				$("#collapseExample").collapse('hide');
-				$("#collapseExampleEdit").collapse('show');
-				
-				if($('#edit_ID').val() == $(this).data('id')) {
-					$('.collapse.show').collapse('hide');
-				}
-				$('#edit_ID').val($(this).data('id'));
-				$('#edit_name').val($(this).data('name'));
-			});
 </script>
 
 <!-- DataTales Gallery -->
@@ -179,8 +29,7 @@
 						</div>
 					</form>
 			<form name="form2" method="post" action="" style="float:right;">
-			<a href="#collapseExample" class="ajax_add btn btn-primary" id="btn-add" data-toggle="collapse" aria-expanded="false"
-					aria-controls="collapseExample" data-id="" data-name="">종류 추가</a>
+				<a href="/~team4/category/add<?=$tmp; ?>" class="btn btn-primary">종류 추가</a>
 			</form>
 		</h6>
 	</div>
@@ -190,15 +39,15 @@
 				<thead>
 					<tr>
 						<th width="20%">ID(number)</th>
-						<th width="70%">name</th>
-						<th width="10%">Delete</th>
+						<th width="10%">name</th>
+						<th width="70%">tmi</th>
 					</tr>
 				</thead>
 				<tfoot>
 					<tr>
 						<th>번호</th>
 						<th>종류명</th>
-						<th>삭제</th>
+						<th>추가설명</th>
 					</tr>
 				</tfoot>
 <?
@@ -207,10 +56,10 @@
         $ID=$row->ID;                                 // 사용자번호
 ?>
 				<tbody>
-					<tr id="rowno<?=$ID; ?>">
+					<tr>
 						<td><?=$ID; ?></td>
-						<td><a href="#collapseExampleEdit" class="ajax_edit" aria-expanded="false" aria-controls="collapseExampleEdit" data-id="<?=$ID; ?>" data-name="<?=$row->name; ?>"><?=$row->name; ?></a></a></td>
-						<td><a href="#" rowno="<?=$ID; ?>" class="ajax_del btn btn-sm mycolor1">삭제</a></td>
+						<td><a href="/~team4/category/view/ID/<?=$ID; ?><?=$tmp; ?>"><?=$row->name; ?></a></td>
+						<td><?=$row->tmi ;?></td>
 					</tr>
 				</tbody>
 <?
@@ -220,44 +69,4 @@
 		</div>
 	</div>
 </div>
-
-		<div class="collapse mymargin5" id="collapseExample">
-			<div class="card card-body" style="padding:0px 5px 0px 5px;">
-				<table class="table table-sm table-bordered mymargin5 alert-primary">
-					<form name="form2"><!--  엔터 처리를 위해 form태그 제거  -->
-						<tr>
-							<td width="10%">
-								<input type="text" name="none" value="" disabled class="form-control form-control-sm" id="none">
-							</td>
-							<td width="80%">
-								<input type="text" name="name" value="" class="form-control form-control-sm" id="add_name">
-							</td>
-							<td width="10%" style="vertical-align:middle">
-								<a href="#" id="ajax_add" class="btn btn-sm btn-primary">저장</a>
-							</td>
-						</tr>
-					</form>
-				</table>
-			</div>
-		</div>
-
-		<div class="collapse mymargin5" id="collapseExampleEdit">
-			<div class="card card-body" style="padding:0px 5px 0px 5px;">
-				<table class="table table-sm table-bordered mymargin5 alert-primary">
-					<form name="form3">
-						<tr>
-							<td width="10%">
-								<input type="text" name="ID" value="" disabled class="form-control form-control-sm" id="edit_ID">
-							</td>
-							<td width="80%">
-								<input type="text" name="name" value="" class="form-control form-control-sm" id="edit_name" >
-							</td>
-							<td width="10%" style="vertical-align:middle">
-								<input type="button" id="ajax_edit" value="수정" class="btn btn-sm btn-primary">
-							</td>
-						</tr>
-					</form>
-				</table>
-			</div>
-		</div>
 <?=$pagination; ?>

@@ -38,12 +38,11 @@
 						</td>
 					</tr>
 					<tr>
-						<td width="20%" class="mycolor2" style="vertical-align:middle">사진 추가(필수)</td>
+						<td width="20%" class="mycolor2" style="vertical-align:middle">사진 추가</td>
 						<td width="80%" align="left">
 							<div class="form-inline">
 								<input type="file" name="pic" value="" class="form-control form-control-sm" />
 							</div>
-							<? if (form_error("pic")==true) echo form_error("pic"); ?>
 						</td>
 					</tr>
 				</table>

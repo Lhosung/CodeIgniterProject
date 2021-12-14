@@ -149,7 +149,7 @@
 
 		public function call_upload()
 		{
-			$config['upload_path']	= './product_img';
+			$config['upload_path']	= './room_img';
 			$config['allowed_types']	= 'gif|jpg|png'; 
 			$config['overwrite']	= TRUE; 
 			$config['max_size'] = 100000000;
@@ -163,9 +163,9 @@
 				$picname=$this->upload->data("file_name");
 
 				$config['image_library'] = 'gd2';
-				$config['source_image'] = './product_img/' . $picname;
+				$config['source_image'] = './room_img/' . $picname;
 				$config['thumb_marker'] = '';
-				$config['new_image'] = './product_img/thumb';
+				$config['new_image'] = './room_img/thumb';
 				$config['create_thumb'] = TRUE;
 				$config['maintain_ratio'] = TRUE;
 				$config['width'] = 200;

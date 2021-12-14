@@ -21,9 +21,9 @@
 			$sql="select * from member order by name";
 			return $this->db->query($sql)->result();
 		}
-		public function rowcount( $text1 )
+		public function rowcount( $text1, $text2 )
 		{
-			$sql="select * from book";
+			$sql="select * from book where start >= '$text1' and end <= '$text2'";
 			return $this->db->query($sql)->num_rows();
 		}
 		function getrow($ID) 

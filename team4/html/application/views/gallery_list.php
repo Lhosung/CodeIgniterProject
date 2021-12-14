@@ -22,10 +22,20 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">이름</span>
                         </div>
-                        <input type="text" name="text1" class="form-control" value="<?=$text1; ?>" onKeydown="if (event.keyCode == 13) { find_text(); }">
                         <div class="input-group-append">
-                            <button class="btn btn-sm mycolor1" type="button" onClick="find_text();">검색</button>
-                        </div>
+                            <select name="text1" class="form-control form-control-sm" onchange="javascript:find_text();">
+								<option value="0">전체</option>
+<?
+		foreach ($list_category as $row1)                             // 연관배열 list_product를 row를 통해 출력한다.
+		{
+			if($row1->ID==$text1)
+				echo("<option value='$row1->ID' selected>$row1->name</option>");
+			else
+				echo("<option value='$row1->ID'>$row1->name</option>");
+		}
+?>
+							</select>
+						</div>
                     </div>
                 </div>
                 <div class="col-6" align="right">

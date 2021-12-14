@@ -29,16 +29,18 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="password" name="pwd" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="비밀번호를 입력하세요">
+                                                id="exampleInputPassword" placeholder="비밀번호를 입력하세요" onKeydown="if (event.keyCode == 13) { javascript:form_login.submit(); }">
                                         </div>
-										<button type="button" class="btn btn-primary btn-user btn-block" onClick="javascript:form_login.submit();">Login</button>
-<!--                                         <hr>
+										<button type="button" class="btn btn-primary btn-user btn-block"  onClick="javascript:form_login.submit();">Login</button>
+<!--                                         
+										<hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
                                         </a>
                                         <a href="index.html" class="btn btn-facebook btn-user btn-block">
                                             <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                        </a> -->
+                                        </a> 
+-->
                                     </form>
                                     <hr>
                                     <div class="text-center">

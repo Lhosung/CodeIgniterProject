@@ -21,7 +21,7 @@
 			$text1 = array_key_exists("text1",$uri_array) ? urldecode($uri_array["text1"]) : date("Y-m-d",strtotime("-1 month")) ;
 			$text2 = array_key_exists("text2",$uri_array) ? urldecode($uri_array["text2"]) : date("Y-m-d") ;
 
-			$base_url = "/gigan/lists/text1/$text1/text2/$text2/page";    // $page_segment = 6;
+			$base_url = "/book/lists/text1/$text1/text2/$text2/page";    // $page_segment = 6;
 			$page_segment = substr_count( substr($base_url,0,strpos($base_url,"page")) , "/" )+1;
 
 			$base_url = "/~team4" . $base_url;

@@ -6,8 +6,18 @@
 			if (!$text1)
 				$sql="select gallery.*, category.name as cName from gallery left join category on gallery.categoryId = category.ID order by category.name limit $start,$limit";   // 전체 자료
 			else
-				$sql="select gallery.*, category.name as cName from gallery left join category on gallery.categoryId = category.ID where category.name like '%$text1%' order by category.name limit $start,$limit";
+				$sql="select gallery.*, category.name as cName from gallery left join category on gallery.categoryId = category.ID where gallery.categoryId=$text1 order by category.name limit $start,$limit";
  
+            return $this->db->query($sql)->result();       // 쿼리실행, 결과 리턴
+        }
+
+		public function gallery_list($text1)
+        {    
+			if (!$text1)
+				$sql="select gallery.*, category.name as cName from gallery left join category on gallery.categoryId = category.ID order by category.name";   // 전체 자료
+			else
+				$sql="select gallery.*, category.name as cName from gallery left join category on gallery.categoryId = category.ID where gallery.categoryId=$text1 order by category.name";
+			
             return $this->db->query($sql)->result();       // 쿼리실행, 결과 리턴
         }
 
@@ -46,7 +56,7 @@
 
 		function getlist_category()
 		{
-			$sql="select * from category order by name";
+			$sql="select * from category order by ID";
 			return $this->db->query($sql)->result();
 		}
     }

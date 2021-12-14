@@ -1,9 +1,12 @@
     <!-- Custom fonts for this template-->
+		  <script src="/~team4/my/js/intlTelInput.js"></script> <!-- API -->
+<script src="https://code.jquery.com/jquery-latest.min.js"></script> <!-- API -->
+<script src="/~team4/my/js/intlTelInput-jquery.min.js"></script> <!-- API -->
     <link href="/~team4/my/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-
+	<link href="/~team4/my/css/intlTelInput.css" rel="stylesheet"><!-- API -->
     <!-- Custom styles for this template-->
     <link href="/~team4/my/admin/css/sb-admin-2.min.css" rel="stylesheet">
 
@@ -40,8 +43,8 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-4 mb-3 mb-sm-0">
-											<input type="text" name="phone1" 
-											 class="form-control form-control-user" size="3" maxlength="4" value=""  placeholder="전화번호 앞 3자리">
+											<input type="text" name="phone1" id="phone1" 
+											 class="form-control form-control-user" value=""  placeholder="전화번호 앞 3자리">
                                     </div>
 									<div class="col-sm-4 mb-3 mb-sm-0">
 											<input type="text" name="phone2" 

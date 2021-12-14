@@ -63,7 +63,7 @@
 					</div>
 					<?
 						if ($row->pic)     // 이미지가 있는 경우
-							echo("<img src='/~team4/product_img/$row->pic' width='200’ class='img-fluid img-thumbnail'>");
+							echo("<img src='/~team4/room_img/$row->pic' width='200’ class='img-fluid img-thumbnail'>");
 						else                   // 이미지가 없는 경우
 							echo("<img src='' width='200’ class='img-fluid img-thumbnail'>");
 					?>

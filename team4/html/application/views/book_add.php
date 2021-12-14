@@ -54,7 +54,7 @@
 						</td>
 						<td width="80%" align="left">
 							<div class="form-inline">
-							<input type="hidden" name="roomId" value="<?=set_value("product_no");?>">
+							<input type="hidden" name="roomId" value="">
 								<select name="sel_roomId" class="form-control form-control-sm" onchange="select_room();">
 									<option value="">선택하세요.</option>
 									<?

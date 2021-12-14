@@ -1,7 +1,7 @@
 <?
 	$ID=$row->ID;                                 // 사용자번호
 
-	$tmp = $text1 ? "/ID/$ID/text1/$text1/page/$page" : "/ID/$ID/page/$page";
+	$tmp = $text1 ? "/text1/$text1/page/$page" : "/page/$page";
 ?>
 <script>
 	function zoomimage(iname, pname)
@@ -21,7 +21,7 @@
 						<td width="20%" class="mycolor2" style="vertical-align:middle"> 번호</td>
 						<td width="80%" align="left"><?=$ID; ?></td>
 					</tr>
-					 <tr>
+					<tr>
 						<td width="20%" class="mycolor2" style="vertical-align:middle">
 							 이름
 						</td>
@@ -55,9 +55,9 @@
 					</tr>
 				</table>
 				<div align="center">
-					<a href="/~team4/gallery/edit<?=$tmp; ?>" class="btn btn-sm mycolor1">수정</a>
-					<a href="/~team4/gallery/del<?=$tmp; ?>" class="btn btn-sm mycolor1" onClick="return confirm('삭제할까요?');">삭제</a> &nbsp;
-					<input type="button" value="이전화면으로" class="btn btn-sm mycolor1" onClick="history.back();">
+					<a href="/~team4/gallery/edit/ID/<?=$ID; ?><?=$tmp; ?>" class="btn btn-sm mycolor1">수정</a>
+					<a href="/~team4/gallery/del/ID/<?=$ID; ?><?=$tmp; ?>" class="btn btn-sm mycolor1" onClick="return confirm('삭제할까요?');">삭제</a> &nbsp;
+					<a href="/~team4/gallery/lists<?=$tmp; ?>" class="btn btn-sm mycolor1">이전 페이지로</a>
 				</div>
 			</form>
 		</div>

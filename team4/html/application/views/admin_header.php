@@ -3,7 +3,10 @@
 
 <head>
 
-    <meta charset="utf-8">
+    <!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" href="/~team4/my/image/Indukfavicon.png" type="image/png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -101,7 +104,7 @@
 
             <!-- Nav Item - GALLERY -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="tables.html" data-toggle="collapse" data-target="#collapseGallery"
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGallery"
                     aria-expanded="true" aria-controls="collapseGallery">
                     <i class="fas fa-fw fa-table"></i>
                     <span>GALLERY</span>
@@ -114,6 +117,14 @@
                         <a class="collapse-item" href="/~team4/gallery">Gallery</a>
                     </div>
                 </div>
+            </li>
+
+			<!-- Nav Item - BOOK Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link" href="/~team4/review">
+                    <i class="fas fa-fw fa-bookmark"></i>
+                    <span>REVIEW</span>
+                </a>
             </li>
 
             <!-- Divider -->

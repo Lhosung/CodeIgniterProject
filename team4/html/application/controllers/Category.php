@@ -7,6 +7,8 @@
             $this->load->model("category_m");				// 모델 category_m 연결
 			$this->load->helper(array("url","date"));	// helper 선언
 			$this->load->library("pagination");			// pagination 선언
+			$this->load->library('upload');				// 사진 업로드 선언
+			$this->load->library('image_lib');			
         }
 
         public function index()                            // 제일 먼저 실행되는 함수
@@ -38,6 +40,7 @@
 			$start=$data["page"];                 // n페이지 : 시작위치
 			$limit=$config["per_page"];        // 페이지 당 라인수
 			
+			$data["row_count"]= $this->category_m->rowcount($text1, $text2, $text3);  // 전체 레코드개수 구하기
 			$data["text1"]=$text1;                      // text1 값 전달을 위한 처리
             $data["list"]=$this->category_m->getlist($text1,$start,$limit);   // 해당페이지 자료읽기
 
@@ -46,39 +49,124 @@
             $this->load->view("admin_footer");                      // 하단 출력 
         }
 
+		public function view()
+        {
+			$uri_array=$this->uri->uri_to_assoc(3);
+			$ID	= array_key_exists("ID",$uri_array) ? $uri_array["ID"] : "" ;
+			$text1 = array_key_exists("text1",$uri_array) ? urldecode($uri_array["text1"]) : "" ;
+			$page = array_key_exists("page",$uri_array) ? urldecode($uri_array["page"]) : "" ;
 
-		public function ajax_insert()
+			$data["text1"]=$text1;
+			$data["page"] = $page;
+			$data["row"] = $this->category_m->getrow($ID);
+
+            $this->load->view("admin_header");
+            $this->load->view("category_view",$data);
+            $this->load->view("admin_footer");
+        }
+
+		public function del()
 		{
-			$name=$this->input->post("name",TRUE);
-			$data = array(
-				"name" => $name
-			);
-			$this->category_m->insertrow($data);
+			$uri_array=$this->uri->uri_to_assoc(3);
+			$ID    =array_key_exists("ID",$uri_array) ? $uri_array["ID"] : "" ;
+			$text1=array_key_exists("text1",$uri_array) ? "/text1/" . urldecode($uri_array["text1"]) : "";
+			$page = array_key_exists("page",$uri_array) ? "/page/" . urldecode($uri_array["page"]) : "" ;
 
-			$ID = $this->db->insert_id();
-			if($ID) echo $ID;
+			$this->category_m->deleterow($ID);
+			redirect("/~team4/category/lists". $text1 . $page);
+
 		}
 
-		public function ajax_update()
-		{
-			$ID = $this->input->post("ID", TRUE);
-			$name=$this->input->post("name",TRUE);
-			
-			$data=array(
-				"name" => $name
-			);
-			
-			$result = $this->category_m->updaterow($data,$ID);
+		public function add()
+		{			
+			$uri_array=$this->uri->uri_to_assoc(3);
+			$text1=array_key_exists("text1",$uri_array) ? "/text1/" . urldecode($uri_array["text1"]) : "";
+			$page = array_key_exists("page",$uri_array) ? "/page/" . urldecode($uri_array["page"]) : "" ;
 
-			if($result) echo $name;
+			$this->load->library("form_validation");	// 라이브러리 등록
+			$this->form_validation->set_rules("name","이름","required|max_length[20]");
+			$this->form_validation->set_rules("tmi","추가정보","required|max_length[60]");
+
+			if ($this->form_validation->run()==FALSE ) // 목록화면의 추가버튼 클릭한 경우
+			{
+				$this->load->view("admin_header");
+				$this->load->view("category_add");    // 입력화면 표시
+				$this->load->view("admin_footer");
+			}
+			else              // 입력화면의 저장버튼 클릭한 경우
+			{
+				$data=array(
+					"name" => $this->input->post("name",TRUE),
+					"tmi" => $this->input->post("tmi",TRUE)
+				);
+				$picname = $this->call_upload();
+				if($picname) $data["pic"] = $picname;
+				$this->category_m->insertrow($data); 
+
+				redirect("/~team4/category/lists". $text1 . $page);
+			}
 		}
-		
-		public function ajax_delete()
-		{
-			$ID = $this->input->post("ID", TRUE);
-			$result=$this->category_m->deleterow($ID);
 
-			if($result) echo $ID;
+		public function edit()
+		{
+			$uri_array=$this->uri->uri_to_assoc(3);
+			$ID    =array_key_exists("ID",$uri_array) ? $uri_array["ID"] : "" ;
+			$text1=array_key_exists("text1",$uri_array) ? "/text1/" . urldecode($uri_array["text1"]) : "";
+			$page = array_key_exists("page",$uri_array) ? "/page/" . urldecode($uri_array["page"]) : "" ;
+
+			$this->load->library("form_validation"); // 라이브러리 등록
+			$this->form_validation->set_rules("name","이름","required|max_length[20]");
+			$this->form_validation->set_rules("tmi","추가정보","required|max_length[60]");
+
+			if ( $this->form_validation->run()==FALSE )     // 수정버튼 클릭한 경우
+			{
+				$this->load->view("admin_header");
+				$data["row"]=$this->category_m->getrow($ID);
+				$this->load->view("category_edit",$data);
+				$this->load->view("admin_footer");
+			}
+			else                                                                   // 저장버튼 클릭한 경우
+			{  
+				$data=array(
+					"name" => $this->input->post("name",TRUE),
+					"tmi" => $this->input->post("tmi",TRUE)
+				);
+				$picname = $this->call_upload();
+				if($picname) $data["pic"] = $picname;
+				$this->category_m->updaterow($data,$ID);
+
+				redirect("/~team4/category/lists". $text1 . $page);
+			}
+		}
+
+		public function call_upload()
+		{
+			$config['upload_path']	= './category_img';
+			$config['allowed_types']	= 'gif|jpg|png'; 
+			$config['overwrite']	= TRUE; 
+			$config['max_size'] = 100000000;
+			$config['max_width'] = 10000;
+			$config['max_height'] = 10000;
+			$this->upload->initialize($config); 
+			if (!$this->upload->do_upload("pic")) 
+				$picname="";
+			else
+			{
+				$picname=$this->upload->data("file_name");
+
+				$config['image_library'] = 'gd2';
+				$config['source_image'] = './category_img/' . $picname;
+				$config['thumb_marker'] = '';
+				$config['new_image'] = './category_img/thumb';
+				$config['create_thumb'] = TRUE;
+				$config['maintain_ratio'] = TRUE;
+				$config['width'] = 200;
+				$config['height'] = 150;
+
+				$this->image_lib->initialize($config);
+				$this->image_lib->resize();
+			}
+			return $picname;
 		}
 	}
 ?>
