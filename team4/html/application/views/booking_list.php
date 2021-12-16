@@ -35,6 +35,32 @@
 				});
 
 			});
+
+			$(document).on('click', '.modal_sel', function(){
+				$('#room_name').text($(this).data('roomname'));
+				$('#username').val($(this).data('username'));
+				$('#start').val($(this).data('start'));
+				$('#end').val($(this).data('end'));
+				$('#price').val($(this).data('price'));
+				$('#pic').attr('src', $(this).data('pic'));
+
+				$('#roomid').val($(this).data('roomid'));
+				$('#memberid').val($(this).data('memberid'));
+				for(var i=1;i<=2;i++){
+						form_booking.count.add(new Option(i+"명", i));
+					}	
+
+			});
+			function select_room(people)
+			{
+				var frm = document.form_booking;
+				var people = $(this).data('people');
+								
+				form_booking.count.options.length=0;															
+					for(var i=1;i<=2;i++){
+						form_booking.count.add(new Option(i+"명", i));
+					}													
+			}
 </script>
 		<!--================Header Area =================-->
 
@@ -137,6 +163,7 @@
 							$cpic[] = $row->pic;
 							$cprice[] = $row->price;
 							$cname[] = $row->name;
+							$cpeople[] = $row->people;
 						}// 사용자번호
 					?>
 <!---------------큰 화면 시작----------------->
@@ -171,9 +198,9 @@
 							<div class="accomodation_item text-center">
 								<div class="hotel_img">
 									<img src="/~team4/room_img/<?=$cpic[$j]?>" alt="" width="260" height="270">
-									<a href='#exampleModal' data-toggle='modal' class="btn theme_btn button_hover">Book Now</a>
+									<a href='#exampleModal' data-toggle='modal' class="modal_sel btn theme_btn button_hover" data-roomid='<?=$cid[$j];?>' data-roomname='<?=$cname[$j];?>' data-start='<?=$text1;?>' data-end='<?=$text2;?>' data-price='<?=$cprice[$j]?>' data-people='<?=$cpeople[$j];?>' data-pic='/~team4/room_img/<?=$cpic[$j];?>' data-username='<?=$this->session->userdata("name");?>' data-memberid='<?=$this->session->userdata("ID");?>'>Book Now</a>
 								</div>
-								<a href='#exampleModal' data-toggle='modal'><h4 class="sec_h4"><?=$cname[$j]?></h4></a>
+								<a href='#exampleModal' data-toggle='modal' class="modal_sel" data-roomid='<?=$cid[$j];?>' data-roomname='<?=$cname[$j];?>' data-start='<?=$text1;?>' data-end='<?=$text2;?>' data-price='<?=$cprice[$j]?>' data-pic='/~team4/room_img/<?=$cpic[$j];?>' data-people='<?=$cpeople[$j];?>' data-username='<?=$this->session->userdata("name");?>' data-memberid='<?=$this->session->userdata("ID");?>'><h4 class="sec_h4" ><?=$cname[$j]?></h4></a>
 								<h5><?$cprice[$j]?></h5>
 							</div>
 						</div>
@@ -300,9 +327,9 @@
 							<div class="accomodation_item text-center">
 								<div class="hotel_img">
 									<img src="/~team4/room_img/<?=$cpic[$j]?>" alt="" width="260" height="270">
-									<a href='#exampleModal' data-toggle='modal' class="btn theme_btn button_hover">Book Now</a>
+									<a href='#exampleModal' data-toggle='modal' data-name='<?=$cname[$j];?>' data-start='<?=$text1;?>' data-end='<?=$text2;?>' data-pic='/~team4/room_img/<?=$cpi[$j];?>' class="btn theme_btn button_hover">Book Now</a>
 								</div>
-								<a href='#exampleModal' data-toggle='modal'><h4 class="sec_h4"><?=$cname[$j]?></h4></a>
+								<a href='#exampleModal' data-toggle='modal'><h4 class="sec_h4"><?=$cname[$j];?></h4></a>
 								<h5><?$cprice[$j]?></h5>
 							</div>
 						</div>
@@ -331,50 +358,58 @@
 				  ?>				
 				</div>
 <!---------------------작은화면 끝------------------------->
-
+<!---------모달 시작---------->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="exampleModalLabel">예약하기</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</button>
       </div>
+      <div class="modal-body" style="text-align:center">
 			<div class="container">
                 <div class="row">
-                    <div class="col-md-6 d_flex" style="padding-right:0px;">
-                        <div class="about_content" style="padding-right:0px;">
-                            <h2 class="title title_color" style="font-size:32px;">이코노미더블룸</h2>
-                            <p>전 객실 발코니를 보유한 디럭스 객실은 넓고 쾌적한 공간감으로 진정한 휴식을 제공합니다.</p>                            
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <img class="img-fluid" src="/~team4/room_img/room1.jpg" alt="img" width="260" height="270">
-                    </div>
-                </div>
-            </div>
+                    <div class="col-md-7 d_flex">
+                        <div class="about_content">
+                            <h2 class="title title_color" id="roomname">이코노미더블룸</h2>
+							<br>
+        <form name="form_booking" method="post" action="">
+			<input type="hidden" name="roomid" id="roomid" value="">
+			<input type="hidden" name="memberId" id="memberid" value="">
 
-      <div class="modal-body bg-light" style="text-align:center">
-        <form name="form_login" method="post" action="/~sale31/_login/check">
           <div class="form-inline">
             회&nbsp;&nbsp;원&nbsp;&nbsp;명 : &nbsp;&nbsp;
-            <input type="text" name="name" size="48" value="" class="form-control form-control-sm" readonly>
+            <input type="text" name="username" id="username" size="30" value="" class="form-control form-control-sm" readonly>
           </div>
 		  <div style="height:10px"></div>
           <div class="form-inline">
             체&nbsp;&nbsp;크&nbsp;&nbsp;인 : &nbsp;&nbsp;
-            <input type="text" name="start" size="48" value="" class="form-control form-control-sm" readonly>
+            <input type="text" name="start" id="start" size="30" value="" class="form-control form-control-sm" readonly>
           </div>
 		  <div style="height:10px"></div>
           <div class="form-inline">
             체크아웃 : &nbsp;&nbsp;
-            <input type="text" name="end" size="48" value="" class="form-control form-control-sm" readonly>
+            <input type="text" name="end" id="end" size="30" value="" class="form-control form-control-sm" readonly>
+          </div>
+		  <div style="height:10px"></div>
+          <div class="form-inline">
+            가&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;격 : &nbsp;&nbsp;
+            <input type="text" name="price" id="price" size="30" value="" class="form-control form-control-sm" readonly>
           </div>
 		  <div style="height:10px"></div>
           <div class="form-inline">
             예약인원 : &nbsp;&nbsp;
-            <input type="text" name="checkout" size="15" value="" class="form-control form-control-sm">
-          </div>
-        </form>
+            <select name="count" class="form-control form-control-sm">
+			</select>
+			</div>
+		</form>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <img class="img-fluid" src="" id='pic' alt="img" width="260" height="270" style="float:right;">
+                    </div>
+                </div>
+            </div>
       </div>
       <div class="modal-footer alert-secondary" style="text-align:center">
         <button type="button" class="btn btn-sm btn-secondary" onclick="javascript:form_login.submit();">확인</button>
@@ -383,6 +418,7 @@
     </div>
   </div>
 </div>
+<!----------모달 끝------------>
 			</div>
         </section>
 

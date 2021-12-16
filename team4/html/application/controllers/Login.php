@@ -29,6 +29,8 @@
 			if($row)
 			{
 				$data=array(
+					"ID"=>$row->ID,
+					"name"=>$row->name,
 					"uid"=>$row->uid,
 					"rank"=>$row->rank
 				);
@@ -48,7 +50,7 @@
 
 		public function logout()
 		{
-			$data=array('uid','rank');
+			$data=array('ID','name','uid','rank');
 			$this->session->unset_userdata($data);
 
 			$this->load->view("main_header");

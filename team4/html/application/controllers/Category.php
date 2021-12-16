@@ -40,7 +40,6 @@
 			$start=$data["page"];                 // n페이지 : 시작위치
 			$limit=$config["per_page"];        // 페이지 당 라인수
 			
-			$data["row_count"]= $this->category_m->rowcount($text1, $text2, $text3);  // 전체 레코드개수 구하기
 			$data["text1"]=$text1;                      // text1 값 전달을 위한 처리
             $data["list"]=$this->category_m->getlist($text1,$start,$limit);   // 해당페이지 자료읽기
 

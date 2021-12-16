@@ -195,7 +195,7 @@
 			$base_url = "/~team4" . $base_url;
 
 
-			$config["per_page"]	 = 10;                              // 페이지당 표시할 line 수
+			$config["per_page"]	 = 3;                              // 페이지당 표시할 line 수
 			$config["total_rows"] = $this->gallery_m->rowcount($text1);  // 전체 레코드개수 구하기
 			$config["uri_segment"] = $page_segment;		 // 페이지가 있는 segment 위치
 			$config["base_url"]	 = $base_url;                // 기본 URL
@@ -207,6 +207,8 @@
 			$start=$data["page"];                 // n페이지 : 시작위치
 			$limit=$config["per_page"];        // 페이지 당 라인수
 			
+			$data["limit"] = $limit;
+			$data["row_count"]= $this->gallery_m->category_row_num();  // 전체 레코드개수 구하기
 			$data["text1"]=$text1;                      // text1 값 전달을 위한 처리
 			$data["category"] = $this->gallery_m->getlist_category();
             $data["list"]=$this->gallery_m->gallery_list($text1);   // 해당페이지 자료읽기

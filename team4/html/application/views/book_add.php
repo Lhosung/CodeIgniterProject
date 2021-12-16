@@ -139,11 +139,6 @@
 						<td width="80%" align="left">
 							<div class="form-inline">
 								<select name="count" class="form-control form-control-sm">
-									<?
-										for($i=1; $i<($row->room_people + 1); $i++){
-											echo("<option value='$i'> $i 명</option>");											
-										}
-									?>
 								</select>
 							</div>
 							<? If (form_error("count")==true) echo form_error("count"); ?>

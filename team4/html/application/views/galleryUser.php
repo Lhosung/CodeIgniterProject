@@ -97,33 +97,93 @@
 						<p>친환경 시스템이 마음 속에 깃들여 있는 우리 호텔 갤러리입니다.</p>
 						<!--================ Categorie Area =================-->
 						<form name="form1" action="" method="post">
-							<section class="blog_categorie_area">
-								<div class="container">
-									<div class="row">
 <?
-	 foreach ($category as $row)
-	 {
+	// 카테고리 목록
+	foreach ($category as $row)
+	{
+		$caID[] = $row->ID;
+		$caName[] = $row->name;
+		$caPic[] = $row->pic;
+		$caTmi[] = $row->tmi;
+	}	
 ?>
-										<div class="col-lg-4">
-											<div class="categories_post">
-												<a href="javascript:find_gallery(<?=$row->ID;?>);">
-												<img src="/~team4/category_img/<?=$row->pic; ?>" alt="post">
-												<div class="categories_details">
-													<div class="categories_text">
-															<h5><?=$row->name; ?></h5>
-														<div class="border_line"></div>
-														<p><?=$row->tmi; ?></p>
-													</div>
+			<!-- 큰 화면 carousel-->
+			<div id="carouselExampleIndicators3" class="carousel carousel-dark slide" data-bs-ride="carousel" data-interval="5000">
+				<div class="carousel-inner">
+<?
+	if($row_count == 0) {
+		echo("<div class='carousel-item active'>
+				<div style='float:center;'>
+					<div class='accomodation_item text-center'>
+						<h5> 카테고리가 없습니다. </h5>
+					</div>
+				</div>
+			</div>
+		");
+	}
+	else {							
+		$row_mod = $limit;
+		for($i=0; $i < ($row_count/$limit); $i++) {
+			
+			if( $i+1 > ($row_count/$limit)) {
+				$row_mod = $row_count % $limit;
+			}
+?>
+					<div class="carousel-item <? if($i == 0) {echo("active");} ?>" >
+						<div class="container">
+<?
+			for($j = $i*$limit; $j < ($i*$limit) + $row_mod; $j++) {
+?>
+					
+							<div class="<? if($j == $i*$limit) echo("gallery-item-first"); else echo("gallery-item");?>">
+								
+								<div class="row" style="justify-content: space-around;">
+
+									<div class="col-lg-4">
+										<div class="categories_post">
+											<a href="javascript:find_gallery('<?=$caID[$j]; ?>');">
+											<img src="/~team4/category_img/<?=$caPic[$j]; ?>" alt="post">
+											<div class="categories_details">
+												<div class="categories_text">
+														<h5><?=$caName[$j]; ?></h5>
+													<div class="border_line"></div>
+													<p><?=$caTmi[$j]; ?></p>
 												</div>
-												</a>
 											</div>
+											</a>
 										</div>
-<?
-    }
-?>
 									</div>
+
 								</div>
-							</section>
+							</div>
+						
+<?
+			}
+?>
+						</div>
+					</div>
+<?
+		}
+	}
+?>
+				  </div>
+
+<?
+	if($row_count > 0) {
+?>
+				  <a class="carousel-control-prev" href="#carouselExampleIndicators3" role="button" data-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				  </a>
+				  <a class="carousel-control-next" href="#carouselExampleIndicators3" role="button" data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				  </a>
+<?
+	}
+?>
+				</div>
+							
 						</form>
 					<!--================ Categorie Area =================-->
                 </div>

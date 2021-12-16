@@ -26,7 +26,6 @@
 
 			$base_url = "/~team4" . $base_url;
 
-
 			$config["per_page"]	 = 5;                              // 페이지당 표시할 line 수
 			$config["total_rows"] = $this->book_m->rowcount($text1, $text2);  // 전체 레코드개수 구하기
 			$config["uri_segment"] = $page_segment;		 // 페이지가 있는 segment 위치
@@ -41,7 +40,7 @@
 
 			$data["text1"]=$text1;
 			$data["text2"]=$text2;
-			$data["list"] = $this->book_m->getlist($text1, $text2,$start,$limit);   // 해당페이지 자료읽기
+			$data["list"] = $this->book_m->getlist($text1,$text2,$start,$limit);   // 해당페이지 자료읽기
             $this->load->view("admin_header");                    // 상단출력(메뉴)
             $this->load->view("book_list",$data);           // book_list에 자료전달
             $this->load->view("admin_footer");                      // 하단 출력 

@@ -54,6 +54,12 @@
 			return $this->db->update("gallery",$row,$where);
 		}
 
+		function category_row_num()
+		{
+			$sql="select * from category order by ID";
+			return $this->db->query($sql)->num_rows();
+		}
+
 		function getlist_category()
 		{
 			$sql="select * from category order by ID";
