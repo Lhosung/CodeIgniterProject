@@ -123,7 +123,7 @@
 			{
 				$data["list"] = $this->gallery_m->getlist_category();
 				$this->load->view("admin_header");
-				$data["row"]=$this->gallery_m->getrow($ID);
+				$data["row"] = $this->gallery_m->getrow($ID);
 				$this->load->view("gallery_edit",$data);
 				$this->load->view("admin_footer");
 			}
@@ -193,7 +193,6 @@
 				$base_url = "/gallery/user/text1/$text1";    // $page_segment = 6;
 			$page_segment = substr_count( substr($base_url,0,strpos($base_url,"page")) , "/" )+1;
 			$base_url = "/~team4" . $base_url;
-
 
 			$config["per_page"]	 = 3;                              // 페이지당 표시할 line 수
 			$config["total_rows"] = $this->gallery_m->rowcount($text1);  // 전체 레코드개수 구하기

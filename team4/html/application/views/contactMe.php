@@ -5,7 +5,7 @@
                 <div class="page-cover text-center">
                     <h2 class="page-cover-tittle">Contact Us</h2>
                     <ol class="breadcrumb">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="/~team4/main">Home</a></li>
                         <li class="active">Contact Us</li>
                     </ol>
                 </div>
@@ -16,15 +16,22 @@
         <!--================Contact Area =================-->
         <section class="contact_area section_gap">
             <div class="container">
-                <div id="mapBox" class="mapBox" 
-                    data-lat="40.701083" 
-                    data-lon="-74.1522848" 
-                    data-zoom="13" 
-                    data-info="PO Box CT16122 Collins Street West, Victoria 8007, Australia."
-                    data-mlat="40.701083"
-                    data-mlon="-74.1522848">
-                </div>
-                <div class="row">
+                
+				<!-- kakao map api -->
+				<div id="map" style="width:100%;height:350px;"></div>
+
+				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a254ba352533efabb9e31b36a8c572b2"></script>
+				<script>
+				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+					mapOption = { 
+						center: new kakao.maps.LatLng(37.63150831276873, 127.0548431731536), // 지도의 중심좌표
+						level: 3 // 지도의 확대 레벨
+					};
+
+				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+				</script>
+				<br/>
+				<div class="row">
                     <div class="col-md-3">
                         <div class="contact_info">
                             <div class="info_item">
@@ -108,9 +115,6 @@
         <script src="/~team4/my/vendors/imagesloaded/imagesloaded.pkgd.min.js"></script>
         <script src="/~team4/my/vendors/isotope/isotope-min.js"></script>
 
-        <!--gmaps Js-->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-        <script src="/~team4/my/js/gmaps.min.js"></script>
         <!-- contact js -->
         <script src="/~team4/my/js/jquery.form.js"></script>
         <script src="/~team4/my/js/jquery.validate.min.js"></script>

@@ -46,18 +46,16 @@
 
 				$('#roomid').val($(this).data('roomid'));
 				$('#memberid').val($(this).data('memberid'));
-				for(var i=1;i<=2;i++){
-						form_booking.count.add(new Option(i+"명", i));
-					}	
+
+				select_room($(this).data('people'));
 
 			});
 			function select_room(people)
 			{
 				var frm = document.form_booking;
-				var people = $(this).data('people');
 								
 				form_booking.count.options.length=0;															
-					for(var i=1;i<=2;i++){
+					for(var i=1;i<=people;i++){
 						form_booking.count.add(new Option(i+"명", i));
 					}													
 			}
@@ -399,7 +397,7 @@
 		  <div style="height:10px"></div>
           <div class="form-inline">
             예약인원 : &nbsp;&nbsp;
-            <select name="count" class="form-control form-control-sm">
+            <select name="count" class="nice-select form-control form-control-sm">
 			</select>
 			</div>
 		</form>
@@ -410,9 +408,13 @@
                     </div>
                 </div>
             </div>
-      </div>
+      </div>	  
       <div class="modal-footer alert-secondary" style="text-align:center">
-        <button type="button" class="btn btn-sm btn-secondary" onclick="javascript:form_login.submit();">확인</button>
+
+	  <div style="float:left;verticla-align:middle;">
+		총합 : 
+	  </div>
+        <button type="button" class="btn btn-sm btn-secondary" onclick="javascript:form_booking.submit();">예약</button>
         <button type="button" class="btn btn-sm btn-light" data-dismiss="modal">닫기</button>
       </div>
     </div>

@@ -2,36 +2,31 @@
     class Review_m extends CI_Model     // 모델 클래스 선언
     {
 
-		public function getlist($text1, $start,$limit)
+		public function getlist($text1,$text2,$start,$limit)
 		{
-			if (!$text1)
-				$sql="select review.*, reviewType.name as reviewType_name 
-                  from review left join reviewType on review.reviewtypeId=reviewType.ID
-                  order by review.name limit $start,$limit";
-			else
-				$sql="select review.*, reviewType.name as reviewType_name 
-                  from review left join reviewType on review.reviewtypeId=reviewType.ID
-                  where review.name like '%$text1%' order by review.name limit $start,$limit";
+			$sql="select review.*, member.name as user
+			  from review left join member on review.userNameNum=member.ID
+			  where review.day between '$text1' and '$text2' order by review.day limit $start,$limit";
 			return $this->db->query($sql)->result();
 		}
-		function getlist_reviewType()
+
+		public function rowcount($text1, $text2)
 		{
-			$sql="select * from reviewType order by name";
-			return $this->db->query($sql)->result();
-		}
-		public function rowcount( $text1 )
-		{
-			if (!$text1)
-				$sql="select * from review";
-			else
-				$sql="select * from review where name like '%$text1%' ";
+			$sql="select * from review where review.day between '$text1' and '$text2'";
 			return $this->db->query($sql)->num_rows();
 		}
+
 		function getrow($ID)  {
-			$sql="select review.*, reviewType.name as reviewType_name 
-              from review left join reviewType on review.reviewtypeId=reviewType.ID 
+			$sql="select review.*, member.name as user
+              from review left join member on review.userNameNum=member.ID 
               where review.ID=$ID";
-			return  $this->db->query($sql)->row();
+			return $this->db->query($sql)->row();
+		}
+
+		function getUserList()
+		{
+			$sql="select * from member order by ID asc";
+			return $this->db->query($sql)->result();
 		}
 
 		function deleterow($ID)  {
@@ -43,9 +38,9 @@
 			return  $this->db->insert("review",$row);
 		}
 
-		function updaterow( $row, $ID )
+		function updaterow($row, $ID)
 		{
-			$where=array( "ID"=>$ID );
+			$where=array("ID"=>$ID);
 			return $this->db->update( "review", $row, $where );
 		}
 

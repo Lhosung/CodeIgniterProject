@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>로얄 호텔 관리자</title>
+    <title>Induk Admin Page</title>
 
     <!-- Custom fonts for this template-->
     <link href="/~team4/my/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -47,7 +47,7 @@
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-hotel"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Royal Admin</div>
+                <div class="sidebar-brand-text mx-3">Induk Royal Admin</div>
             </a>
 
             <!-- Divider -->
@@ -162,9 +162,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?=$this->session->userdata("name");?></span>
                                 <img class="img-profile rounded-circle"
-                                    src="/~team4/my/admin/img/undraw_profile.svg">
+                                    src="/~team4/my/admin/img/undraw_posting_photo.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -174,7 +174,7 @@
                                     Go to Main
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="/~team4/login/logout" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
