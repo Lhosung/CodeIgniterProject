@@ -14,7 +14,7 @@
 
 		public function getlist2($text2)
 		{
-			$sql="select 
+			$sql="select
 				sum(if(month(book.start)=1, book.prices, 0)) as s1,
 				sum(if(month(book.start)=2, book.prices, 0)) as s2,
 				sum(if(month(book.start)=3, book.prices, 0)) as s3,
@@ -31,12 +31,16 @@
 			  where $text2=YEAR(book.start)";
 			return $this->db->query($sql)->result();
 		}
-		public function rowcount( $text1)
+		public function rowcount( $today)
 		{
-			$sql="select room.name as room_name, count(book.ID) as book_cnt
-			  from room right join book on room.ID=book.roomId
-			  where $text1=MONTH(book.start)
-			  group by room.name limit 10";	
+			$sql="select book.ID from book
+			  where $today=YEAR(book.start)";	
+			return $this->db->query($sql)->num_rows();
+		}
+
+		public function reviewcount($today)
+		{
+			$sql="select distinct(userNameNum) from review where $today=YEAR(day)";	
 			return $this->db->query($sql)->num_rows();
 		}
     }

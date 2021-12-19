@@ -49,7 +49,7 @@
                         <ul class="nav navbar-nav menu_nav ml-auto">
                             <li class="nav-item active"><a class="nav-link" href="/~team4/main">메인</a></li>
                             <li class="nav-item"><a class="nav-link" href="/~team4/about">리조트 소개</a></li>
-							<li class="nav-item"><a class="nav-link" href="/~team4/booking">방 소개</a></li>
+							<li class="nav-item"><a class="nav-link" href="/~team4/roomInfo">방 소개</a></li>
                             <li class="nav-item"><a class="nav-link" href="/~team4/booking">예약</a></li>
                             <li class="nav-item submenu dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">소셜</a>
@@ -64,7 +64,7 @@
 		<li class='nav-item'><a class='nav-link' href='/~team4/register'>회원가입</a></li>"); 
 	}	
 	else {
-		echo("<li class='nav-item'><a class='nav-link' href='/~team4/member/myPage'>내 정보</a></li>
+		echo("<li class='nav-item'><a class='nav-link' href='/~team4/mypage'>내 정보</a></li>
 		<li class='nav-item'><a class='nav-link' href='/~team4/login/logout'>로그아웃</a></li>");
 	}
 

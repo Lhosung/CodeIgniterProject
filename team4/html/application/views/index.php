@@ -54,9 +54,9 @@
             	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
 				<div class="container">
 					<div class="banner_content text-center">
-						<h6>인덕 로얄 리조트에 오신 것을 환영합니다.</h6>
+					<h3>인덕 로열 리조트에 오신 것을 환영합니다.</h3>
 						<h2>Induk Royal</h2>
-						<p>보다 편안하고 고급스러운 휴식의 세상으로 초대합니다.</p>
+						<h4>더 편안하고 고급스러운 휴식의 세상으로 초대합니다.</h4>
 					</div>
 				</div>
             </div>
@@ -144,14 +144,14 @@
         </section>
         <!--================Banner Area =================-->
 
-        <!--================ Accomodation Area  =================-->
+         <!--================ About History Area  =================-->
         <section class="about_history_area section_gap">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 d_flex align-items-center">
                         <div class="about_content ">
                             <h2 class="title title_color" align="center">Induk Royal<br>"특별한 휴식을 위하여"<br>힐링 & 휴식</h2>
-                            <p>고품격 Refresh를 제공하는 생활 속의 리조트를 컨셉으로 개발된 "Induk Royal"은 다양하고 독특한 시설을 갖춘 사계절 종합리조트입니다.</p>
+                            <p>고품격 Refresh를 제공하는 생활 속의 리조트를 주제로 개발된 "Induk Royal"은 다양하고 독특한 시설을 갖춘 사계절 종합리조트입니다.</p>
                             <a href="#" class="button_hover theme_btn_two">Request Custom Price</a>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
                 </div>
             </div>
         </section>
-        <!--================ Accomodation Area  =================-->
+        <!--================ About History Area  =================-->
         
         <!--================ Facilities Area  =================-->
         <section class="facilities_area section_gap">
@@ -182,13 +182,13 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="facilities_item">
                             <h4 class="sec_h4"><i class="lnr lnr-bicycle"></i>헬스 클럽</h4>
-                            <p>여행와서 근손실 걱정하는 당신을 위한 맞춤공간!</p>
+                            <p>여행하러 와서 근 손실 걱정하는 당신을 위한 맞춤 공간!</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="facilities_item">
-                            <h4 class="sec_h4"><i class="lnr lnr-shirt"></i>인피니티 풀</h4>
-                            <p>일상에서 벗어나 자연에서 즐기는 인피니티풀</p>
+                            <h4 class="sec_h4"><i class="lnr lnr-drop"></i>인피니티 풀</h4>
+                            <p>일상에서 벗어나 자연에서 즐기는 인피니티 풀</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
@@ -205,8 +205,8 @@
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="facilities_item">
-                            <h4 class="sec_h4"><i class="lnr lnr-construction"></i>바 & 라운지</h4>
-                            <p>연인과 함께 편안하게 술과 음악을 즐길수 있는 바 & 라운지</p>
+                            <h4 class="sec_h4"><i class="lnr lnr lnr-funnel"></i>바 & 라운지</h4>
+                            <p>연인과 함께 편안하게 술과 음악을 즐길 수 있는 바 & 라운지</p>
                         </div>
                     </div>
                 </div>
@@ -214,140 +214,60 @@
         </section>
         <!--================ Facilities Area  =================-->
         
-         <!--================ About History Area  =================-->
-
-        <!--================ About History Area  =================-->
-        
-        <!--================ Testimonial Area  =================-->
-        <section class="testimonial_area section_gap">
-            <div class="container">
-                <div class="section_title text-center">
-                    <h2 class="title_color">Testimonial from our Clients</h2>
-                    <p>The French Revolution constituted for the conscience of the dominant aristocratic class a fall from </p>
-                </div>
-                <div class="testimonial_slider owl-carousel">
-                    <div class="media testimonial_item">
-                        <img class="rounded-circle" src="/~team4/my/image/testtimonial-1.jpg" alt="">
-                        <div class="media-body">
-                            <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If you think about it, you travel across her face, and She is the </p>
-                            <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
-                            <div class="star">
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star-half-o"></i></a>
-                            </div>
-                        </div>
-                    </div>    
-                    <div class="media testimonial_item">
-                        <img class="rounded-circle" src="/~team4/my/image/testtimonial-1.jpg" alt="">
-                        <div class="media-body">
-                            <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If you think about it, you travel across her face, and She is the </p>
-                            <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
-                            <div class="star">
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star-half-o"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="media testimonial_item">
-                        <img class="rounded-circle" src="/~team4/my/image/testtimonial-1.jpg" alt="">
-                        <div class="media-body">
-                            <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If you think about it, you travel across her face, and She is the </p>
-                            <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
-                            <div class="star">
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star-half-o"></i></a>
-                            </div>
-                        </div>
-                    </div>    
-                    <div class="media testimonial_item">
-                        <img class="rounded-circle" src="/~team4/my/image/testtimonial-1.jpg" alt="">
-                        <div class="media-body">
-                            <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If you think about it, you travel across her face, and She is the </p>
-                            <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
-                            <div class="star">
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star-half-o"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--================ Testimonial Area  =================-->
-        
-        <!--================ Latest Blog Area  =================-->
+         <!--================ Review Area  =================-->
         <section class="latest_blog_area section_gap">
             <div class="container">
                 <div class="section_title text-center">
-                    <h2 class="title_color">latest posts from blog</h2>
-                    <p>The French Revolution constituted for the conscience of the dominant aristocratic class a fall from </p>
+                    <h2 class="title_color">리조트 경험 후기</h2>
+                    <p></p>
+
                 </div>
-                <div class="row mb_30">
-                    <div class="col-lg-4 col-md-6">
+
+
+				<!-- 리뷰 목록 -->
+                <div class="row mb_30 testimonial_slider owl-carousel">
+<?
+    foreach ($list_review as $row1)
+	{
+?>
+                    <div class="col-lg col-md">
                         <div class="single-recent-blog-post">
                             <div class="thumb">
-                                <img class="img-fluid" src="/~team4/my/image/blog/blog-1.jpg" alt="post">
+<?
+	if ($row1->pic)     // 이미지가 있는 경우
+		echo("<img src='/~team4/review_img/$row1->pic' class='img-fluid' alt='post'>");
+	else                   // 이미지가 없는 경우
+		echo("<img src='' class='img-fluid' alt='post'>");
+?>
                             </div>
                             <div class="details">
                                 <div class="tags">
-                                    <a href="#" class="button_hover tag_btn">Travel</a>
-                                    <a href="#" class="button_hover tag_btn">Life Style</a>
+<?
+	if($row1->ratings == 0) echo("☆☆☆☆☆");
+	else if($row1->ratings == 1) echo("★☆☆☆☆");
+	else if($row1->ratings == 2) echo("★★☆☆☆");
+	else if($row1->ratings == 3) echo("★★★☆☆");
+	else if($row1->ratings == 4) echo("★★★★☆");
+	else if($row1->ratings == 5) echo("★★★★★");
+	else echo("");
+?>
                                 </div>
-                                <a href="#"><h4 class="sec_h4">Low Cost Advertising</h4></a>
-                                <p>Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A farmer.</p>
-                                <h6 class="date title_color">31st January,2018</h6>
+                                <h4 class="sec_h4"><?=$row1->title ;?></h4>
+								<h6 class="sec_h6">작성자 : <?=$row1->user ;?></h6>
+                                <p><?=$row1->content ;?></p>
+                                <h6 class="date title_color"><?=$row1->day ;?></h6>
                             </div>	
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-recent-blog-post">
-                            <div class="thumb">
-                                <img class="img-fluid" src="/~team4/my/image/blog/blog-2.jpg" alt="post">
-                            </div>
-                            <div class="details">
-                                <div class="tags">
-                                    <a href="#" class="button_hover tag_btn">Travel</a>
-                                    <a href="#" class="button_hover tag_btn">Life Style</a>
-                                </div>
-                                <a href="#"><h4 class="sec_h4">Creative Outdoor Ads</h4></a>
-                                <p>Self-doubt and fear interfere with our ability to achieve or set goals. Self-doubt and fear are</p>
-                                <h6 class="date title_color">31st January,2018</h6>
-                            </div>	
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-recent-blog-post">
-                            <div class="thumb">
-                                <img class="img-fluid" src="/~team4/my/image/blog/blog-3.jpg" alt="post">
-                            </div>
-                            <div class="details">
-                                <div class="tags">
-                                    <a href="#" class="button_hover tag_btn">Travel</a>
-                                    <a href="#" class="button_hover tag_btn">Life Style</a>
-                                </div>
-                                <a href="#"><h4 class="sec_h4">It S Classified How To Utilize Free</h4></a>
-                                <p>Why do you want to motivate yourself? Actually, just answering that question fully can </p>
-                                <h6 class="date title_color">31st January,2018</h6>
-                            </div>	
-                        </div>
-                    </div>
+<?
+	}
+?>
                 </div>
+				<br/>
             </div>
         </section>
-        <!--================ Recent Area  =================-->
 
+        <!--================ End Review Area  =================-->
         
 
         <!--================ start footer Area  =================-->	

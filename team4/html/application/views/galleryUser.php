@@ -4,7 +4,7 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="icon" href="/~team4/my/image/favicon.png" type="image/png">
+        <link rel="icon" href="/~team4/my/image/Indukfavicon.png" type="image/png">
         <title>Induk Royal</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="/~team4/my/css/bootstrap.css">
@@ -37,7 +37,7 @@
                         <ul class="nav navbar-nav menu_nav ml-auto">
                             <li class="nav-item"><a class="nav-link" href="/~team4/main">메인</a></li>
                             <li class="nav-item"><a class="nav-link" href="/~team4/about">리조트 소개</a></li>
-							<li class="nav-item"><a class="nav-link" href="/~team4/contact">직원 소개</a></li>
+							<li class="nav-item"><a class="nav-link" href="/~team4/roomInfo">방 소개</a></li>
                             <li class="nav-item"><a class="nav-link" href="/~team4/booking">예약</a></li>
                             <li class="nav-item submenu dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">소셜</a>
@@ -59,7 +59,7 @@
 	if ($this->session->userdata("rank")==1)
 		echo("<li class='nav-item'><a class='nav-link' href='/~team4/admin'>Admin</a></li>");
 ?>
-
+							<li class="nav-item"><a class="nav-link" href="/~team4/contact">직원 소개</a></li>
                         </ul>
                     </div> 
                 </nav>
@@ -76,20 +76,18 @@
 		form1.submit();
 	}
 </script>
-        <!--================Breadcrumb Area =================-->
-        <section class="breadcrumb_area">
-            <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+       <!--================Banner Area =================-->
+        <section class="banner_area blog_banner d_flex align-items-center">
+            <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
             <div class="container">
-                <div class="page-cover text-center">
-                    <h2 class="page-cover-tittle">Gallery</h2>
-                    <ol class="breadcrumb">
-                        <li><a href="/~team4/main">Home</a></li>
-                        <li class="active">Gallery</li>
-                    </ol>
+                <div class="banner_content text-center">
+				<h3>자연과 같은 편안한 분위기</h3>
+						<h2>Induk Royal</h2><br/>
+						<h5>자연과 하나가 된 Induk Royal의 구석구석을 한눈에 볼 수 있는 페이지</h5>
                 </div>
             </div>
         </section>
-        <!--================Breadcrumb Area =================-->
+        <!--================Banner Area =================-->
 
         <!--================Breadcrumb Area =================-->
         <section class="gallery_area section_gap">
@@ -140,9 +138,6 @@
 					<div class="col-lg">
 							<div class="<? if($j == $i*$limit) echo("gallery-item-first"); else echo("gallery-item");?>">
 								
-								
-
-									
 										<div class="categories_post">
 											<a href="javascript:find_gallery('<?=$caID[$j]; ?>');">
 											<img src="/~team4/category_img/<?=$caPic[$j]; ?>" alt="post">
@@ -158,8 +153,7 @@
 									</div>
 
 								</div>
-							
-						
+					
 <?
 			}
 ?>
@@ -221,10 +215,7 @@
 ?>
 					<div class="col-lg">
 							<div class="<? if($j == $i*$limit) echo("gallery-item-first"); else echo("gallery-item");?>">
-								
-								
 
-									
 										<div class="categories_post">
 											<a href="javascript:find_gallery('<?=$caID[$j]; ?>');">
 											<img src="/~team4/category_img/<?=$caPic[$j]; ?>" alt="post">
@@ -238,10 +229,7 @@
 											</a>
 										</div>
 									</div>
-
 								</div>
-							
-						
 <?
 			}
 ?>
@@ -390,10 +378,10 @@
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                     <div class="col-lg-4 col-sm-12 footer-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-dribbble"></i></a>
-                        <a href="#"><i class="fa fa-behance"></i></a>
+                        <a href="#" style="font-size:15px;">201712046 한정수</a>
+						<a href="#" style="font-size:15px;">201812044 임호성</a>
+						<a href="#" style="font-size:15px;">2016120691 전영준</a>
+						<a href="#" style="font-size:15px;">201718048 유재우</a>
                     </div>
                 </div>
             </div>

@@ -29,7 +29,7 @@
 
 		function getMyInfo($uid) 
 		{
-			$sql="select * from member where uid=$uid";	// 조인 할 거 개많음
+			$sql="select * from member where uid='$uid'";	// 조인 할 거 개많음
 			return  $this->db->query($sql)->row();
 		}
 

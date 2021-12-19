@@ -18,13 +18,16 @@
 			$uri_array=$this->uri->uri_to_assoc(3);
 			$text1 = array_key_exists("text1",$uri_array) ? urldecode($uri_array["text1"]) : date("m") ;
 			$text2 = array_key_exists("text2",$uri_array) ? urldecode($uri_array["text2"]) : date("Y") ;
+			$today = date("Y");
 
-			$data["rowcount"] = $this->admin_m->rowcount($text1);
+			$data["rowcount"] = $this->admin_m->rowcount($today);
+			$data["reviewcount"] = $this->admin_m->reviewcount($today);
 			$data["text1"]=$text1;
 			$data["text2"]=$text2;
 
 			$data["list"] = $this->admin_m->getlist($text1);   // 해당페이지 자료읽기
 			$data["list2"] = $this->admin_m->getlist2($text2);   // 해당페이지 자료읽기
+
             $this->load->view("admin_header");                    // 상단출력(메뉴)
             $this->load->view("admin_index", $data);           // admin_index에 자료전달
             $this->load->view("admin_footer");                      // 하단 출력 

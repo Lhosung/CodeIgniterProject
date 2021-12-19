@@ -65,18 +65,21 @@
 
 		public function myPage()
 		{
-			$uri_array = $this->uri->uri_to_assoc(3);
-			$uid  = $this->session->userdata("uid") ? urldecode($uri_array["uid"]) : "";
-			$text1 = array_key_exists("text1",$uri_array) ? urldecode($uri_array["text1"]) : "" ;
-			$page  = array_key_exists("page",$uri_array) ? urldecode($uri_array["page"]) : 0 ;
+			if(!$this->session->userdata('uid'))redirect("/~team4/main");
+			else{
+				$uri_array = $this->uri->uri_to_assoc(3);
+				$uid  = $this->session->userdata('uid');
+				$text1 = array_key_exists("text1",$uri_array) ? urldecode($uri_array["text1"]) : "" ;
+				$page  = array_key_exists("page",$uri_array) ? urldecode($uri_array["page"]) : 0 ;
 
-			$data["text1"]=$text1;                      // text1 값 전달을 위한 처리
-			$data["page"]=$page;
-			$data["row"]=$this->member_m->getMyInfo($uid);
+				$data["text1"]=$text1;                      // text1 값 전달을 위한 처리
+				$data["page"]=$page;
+				$data["row"]=$this->member_m->getMyInfo($uid);
 
-			$this->load->view("main_header");                    // 상단출력(메뉴)
-            $this->load->view("member_user",$data);           // member_list에 자료전달
-            $this->load->view("main_footer"); 
+				$this->load->view("main_header");                    // 상단출력(메뉴)
+				$this->load->view("member_user",$data);           // member_list에 자료전달
+				$this->load->view("main_footer"); 
+			}
 		}
 
 		public function del()

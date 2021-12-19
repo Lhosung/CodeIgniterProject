@@ -93,56 +93,6 @@
 			}
 		}
 
-		public function del()
-		{
-			$uri_array=$this->uri->uri_to_assoc(3);
-			$ID    = array_key_exists("ID",$uri_array) ? $uri_array["ID"] : "" ;
-			$text1 = array_key_exists("text1",$uri_array) ? "/text1/" . urldecode($uri_array["text1"]) : "" ;
-			$text2 = array_key_exists("text2",$uri_array) ? "/text2/" . urldecode($uri_array["text2"]) : "" ;
-			$page = array_key_exists("page",$uri_array) ? "/page/" . urldecode($uri_array["page"]) : "" ;
-
-			$this->reviewer_m->deleterow($ID);
-			redirect("/~team4/review/lists" . $text1 . $text2 . $page);    //   목록화면으로 이동.
-
-		}
-
-		public function edit()
-		{
-			$uri_array=$this->uri->uri_to_assoc(3);
-			$ID	= array_key_exists("ID",$uri_array) ? $uri_array["ID"] : "" ;
-			$text1 = array_key_exists("text1",$uri_array) ? "/text1/" . urldecode($uri_array["text1"]) : "" ;
-			$text2 = array_key_exists("text2",$uri_array) ? "/text2/" . urldecode($uri_array["text2"]) : "" ;
-			$page = array_key_exists("page",$uri_array) ? "/page/" . urldecode($uri_array["page"]) : 0 ;
-
-			$this->load->library("form_validation");	// 폼검증 라이브러리 로드
-			$this->form_validation->set_rules("userNameNum","유저이름","required");
-			$this->form_validation->set_rules("day","날짜","required");
-
-			if ( $this->form_validation->run()==FALSE )     // 수정버튼 클릭한 경우
-			{
-				$data["list"] = $this->reviewer_m->getUserList();
-				$this->load->view("main_header");
-				$data["row"] = $this->reviewer_m->getrow($ID);
-				$this->load->view("review_edit", $data);
-				$this->load->view("main_footer");
-			}
-			else           // 저장버튼 클릭한 경우
-			{  	
-				$data=array(
-					"userNameNum" => $this->input->post("userNameNum",TRUE),
-					"day" => $this->input->post("day",TRUE),
-					"title" => $this->input->post("title",TRUE),
-					"content" => $this->input->post("content",TRUE),
-					"ratings" => $this->input->post("ratings",TRUE)
-				);
-				$picname = $this->call_upload();
-				if($picname) $data["pic"] = $picname;
-				$result = $this->reviewer_m->updaterow($data, $ID);
-
-				redirect("/~team4/review/lists" . $text1 . $text2. $page);
-			}
-		}
-
 		public function call_upload()
 		{
 			$config['upload_path'] = './review_img';		// 저장할 경로

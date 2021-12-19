@@ -92,7 +92,11 @@
             <div class="booking_table d_flex align-items-center">
             	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
 				<div class="container">
-
+					<div class="banner_content text-center">
+						<h3>간편하고 편리한 예약</h3>
+						<h2>Induk Royal</h2>
+						<h4>방마다 수용인원과 크기가 다를 수 있음에 주의하세요!</h4>
+					</div>
 				</div>
             </div>
             <div class="hotel_booking_area position">
