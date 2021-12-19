@@ -1,3 +1,36 @@
+<script>
+			function find_text1()
+			{
+				form1.action="/~team4/admin/lists/text1/" + form1.text1.value + "/text2/" + form2.text2.value ;
+				form1.submit();
+			}
+			function find_text2()
+			{
+				form2.action="/~team4/admin/lists/text1/" + form1.text1.value + "/text2/" + form2.text2.value ;
+				form2.submit();
+			}
+			$(function(){
+				$("#text1") .datetimepicker({
+					locale: 'ko',
+					format: 'M',
+					defaultDate: moment()
+				});
+				$("#text2") .datetimepicker({
+					locale: 'ko',
+					format: 'YYYY',
+					viewMode: "years",
+					defaultDate: moment()
+				});
+
+				$("#text1") .on("dp.change", function (e){
+					find_text1();
+				});
+				$("#text2") .on("dp.change", function (e){
+					find_text2();
+				});
+
+			});
+</script>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -99,7 +132,15 @@
                     <!-- Content Row -->
 
                     <div class="row">
+	<?
+		$str_label = "";
+		$str_data = "";
 
+		foreach($list2 as $row)
+		
+
+		
+	?>
                         <!-- Area Chart -->
                         <div class="col-xl-8 col-lg-7">
                             <div class="card shadow mb-4">
@@ -108,18 +149,16 @@
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
                                     <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
+										<form name="form2" method="post" action="" >
+											<div class="input-group input-group-sm table-sm date" id="text2">
+												<input type="hidden" name="text2" value="<?=$text2;?>"class="form-control">
+												<div class="input-group-append">
+													<div class="input-group-text">
+														<div class="input-group-addon"><i class="far fa-calendar-alt fa-lg"></i></div>
+													</div>
+												</div>
+											</div>
+										</form>
                                     </div>
                                 </div>
                                 <!-- Card Body -->
@@ -137,38 +176,86 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">월간 객실 이용 현황</h6>
                                     <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
+										<form name="form1" method="post" action="" >
+											<div class="input-group input-group-sm table-sm date" id="text1">
+												<input type="hidden" name="text1" value="<?=$text1;?>"class="form-control">
+												<div class="input-group-append">
+													<div class="input-group-text">
+														<div class="input-group-addon"><i class="far fa-calendar-alt fa-lg"></i></div>
+													</div>
+												</div>
+											</div>
+										</form>
                                     </div>
                                 </div>
+	<?
+		$str_label = "";
+		$str_data = "";
+		
+		foreach($list as $row)
+		{
+			$str_label .= "'$row->room_name',";
+			$str_data .= $row->book_cnt . ',';
+		}
+	?>
+<script src="/~team4/my/admin/js/utils.js"></script>
+	<style>
+		canvas {
+			-moz-user-select : none;
+			-webkit-user-select : none;
+			-ms-user-select : none;
+		}
+	</style>
+
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-pie pt-4 pb-2">
-                                        <canvas id="myPieChart"></canvas>
+                                        <canvas id="myPieChart2"></canvas> 
                                     </div>
-                                    <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Direct
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Social
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> Referral
-                                        </span>
-                                    </div>
+	<script>
+		
+		var config = {
+			type:  "doughnut",
+			data: {
+				datasets:[{
+						data: [ <?=$str_data;?>],
+						backgroundColor : [
+							'#4e73df',
+							'#1cc88a',
+							'#36b9cc',
+							window.chartColors.yellow,
+							window.chartColors.orange,						
+							],
+							label: "Dataset 1"
+				}],
+				labels: [ <?=$str_label;?>]
+			},
+			options: {
+				responsive: true,
+				legend: {
+					labels: {
+						padding: 15,
+				    },
+					position: "bottom",
+				},
+				title: {
+					disply: false,
+					text: "객실 분포도"
+				},
+				animation: {
+					animateScale: true,
+					animateRotate: true
+				}				
+			}
+		};
+
+		window.onload = function(){
+			var ctx = document.getElementById("myPieChart2").getContext("2d");
+			window.myDoughnut = new Chart(ctx, config);
+		};
+	</script>
                                 </div>
                             </div>
                         </div>

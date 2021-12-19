@@ -49,13 +49,13 @@
                         <ul class="nav navbar-nav menu_nav ml-auto">
                             <li class="nav-item active"><a class="nav-link" href="/~team4/main">메인</a></li>
                             <li class="nav-item"><a class="nav-link" href="/~team4/about">리조트 소개</a></li>
-							<li class="nav-item"><a class="nav-link" href="/~team4/contact">직원 소개</a></li>
+							<li class="nav-item"><a class="nav-link" href="/~team4/booking">방 소개</a></li>
                             <li class="nav-item"><a class="nav-link" href="/~team4/booking">예약</a></li>
                             <li class="nav-item submenu dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">소셜</a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item"><a class="nav-link" href="/~team4/gallery/user">갤러리</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="blog-single.html">리뷰</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/~team4/reviewer">리뷰</a></li>
                                 </ul>
                             </li>
 <?
@@ -72,7 +72,7 @@
 	if ($this->session->userdata("rank")==1)
 		echo("<li class='nav-item'><a class='nav-link' href='/~team4/admin'>Admin</a></li>");
 ?>
-
+							<li class="nav-item"><a class="nav-link" href="/~team4/contact">직원 소개</a></li>
                         </ul>
                     </div> 
                 </nav>

@@ -1,10 +1,10 @@
-
 <script>
 			function find_text()
 			{
-				form1.action="/~team4/booking/lists/text1/" + form1.text1.value + "/text2/" + form1.text2.value + "/text3/" + form1.text3.value + "/page";
+				form1.action="/~team4/booking/lists/text1/" + form1.text1.value + "/text2/" + form1.text2.value + "/text3/" + form1.text3.value + "/text4/" + form1.text4.value + "/page";
 				form1.submit();
 			}
+			
 			function find_room()
 			{
 				var start = form1.text1.value;
@@ -14,8 +14,15 @@
 				var datStart = new Date(arrStart[0], arrStart[1], arrStart[2]);
 				var datEnd = new Date(arrEnd[0], arrEnd[1], arrEnd[2]);
 
+				var diff = new Date() - new Date(arrStart[0], arrStart[1]-1, arrStart[2]);
+				var currDay = 24*60*60*1000;
+				var diff_day = diff/currDay;
+				
 				if(datStart >= datEnd){
 					alert('시작일보다 종료일이 커야합니다.');
+				}
+				else if(diff_day >= 0 ){
+					alert('시작일이 오늘보다 커야합니다.');
 				}
 				else{
 					find_text();
@@ -33,37 +40,51 @@
 					format: 'YYYY-MM-DD',
 					defaultDate: moment()
 				});
-
 			});
 
 			$(document).on('click', '.modal_sel', function(){
-				$('#room_name').text($(this).data('roomname'));
+				$('#roomname').text($(this).data('roomname'));
 				$('#username').val($(this).data('username'));
 				$('#start').val($(this).data('start'));
 				$('#end').val($(this).data('end'));
 				$('#price').val($(this).data('price'));
+				$('#txtprice').val($(this).data('price').toLocaleString() + '원');
 				$('#pic').attr('src', $(this).data('pic'));
 
-				$('#roomid').val($(this).data('roomid'));
-				$('#memberid').val($(this).data('memberid'));
+				$('#roomId').val($(this).data('roomid'));
+				$('#memberId').val($(this).data('memberid'));
 
-				select_room($(this).data('people'));
+				select_room($(this).data('people'));				
+				$('.nice-select').last().css({'display':'none'});
+				$('#count').css({'display':'inline-block'});
 
+				select_people();
 			});
 			function select_room(people)
-			{
-				var frm = document.form_booking;
-								
+			{			
 				form_booking.count.options.length=0;															
-					for(var i=1;i<=people;i++){
+					for(var i=1;i<=people+1;i++){
 						form_booking.count.add(new Option(i+"명", i));
 					}													
+			}
+			function select_people(){
+				var diff = new Date(form_booking.end.value) - new Date(form_booking.start.value);
+				var currDay = 24*60*60*1000;
+				var day = parseInt(diff/currDay);
+				var prices = parseInt(form_booking.price.value) * day;
+
+				if (form_booking.count.value >= form_booking.count.options.length)
+				{
+					prices = prices + parseInt(prices/2);
+				}
+				
+				$('#prices').val(prices);
+				$('#txtprices').text('합계 : ' + prices.toLocaleString() + '원');
 			}
 </script>
 		<!--================Header Area =================-->
 
 <!-- 헤더 -->
-
         <!--================Header Area =================-->
         
         <!--================Banner Area =================-->
@@ -107,26 +128,37 @@
 										<div class="col-md-4">
 											<div class="book_tabel_item">
 												<div class="input-group">
-													<select class="wide">
-														<option data-display="Adult">Adult</option>
-														<option value="1">Old</option>
-														<option value="2">Younger</option>
-														<option value="3">Potato</option>
-													</select>
-												</div>
-											<div class="input-group">
 
-													<select name="text3" class="wide">
-														<option value="0">선택하세요.</option>
-														<?
-															foreach ($list_room as $row)
-															{
-																if($row->ID==$text3)
-																	echo("<option value='$row->ID' selected>$row->name</option>");
-																else
-																	echo("<option value='$row->ID'>$row->name</option>");
+														<select name="text3" class="wide">
+															<option value="0">선택하세요.</option>
+															<?
+																foreach ($list_room as $row)
+																{
+																	if($row->ID==$text3)
+																		echo("<option value='$row->ID' selected>$row->name</option>");
+																	else
+																		echo("<option value='$row->ID'>$row->name</option>");
+																}
+															?>		
+														</select>													
+												</div>
+												<div class="input-group">
+													<select name="text4" class="wide">
+													<option value="0">선택하세요.</option>
+													<?
+														$maxPeople = 4;
+														for($i=1;$i<=$maxPeople;$i++){
+															if($i==$text4){
+																	echo("<option value='$i' selected>$i");
+																	echo("명</option>");
 															}
-														?>		
+															else{
+																echo("<option value='$i'>$i");
+																echo("명</option>");
+															}
+														}
+															
+													?>
 													</select>
 												</div>
 											</div>
@@ -150,10 +182,10 @@
         <!--================ Accomodation Area  =================-->
         <section class="accomodation_area section_gap">
             <div class="container">
-                <div class="section_title text-center">
-                    <h2 class="title_color">Hotel Accomodation</h2>
-                    <p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast, </p>
-                </div>
+				<div class="section_title text-center">
+                    <h2 class="title_color">예약 서비스</h2>
+                    <p>인원수와 용도에 맞는 방을 선택해주세요.</p>
+                </div>                
 					<?
 						foreach($list as $row)
 						{
@@ -196,10 +228,10 @@
 							<div class="accomodation_item text-center">
 								<div class="hotel_img">
 									<img src="/~team4/room_img/<?=$cpic[$j]?>" alt="" width="260" height="270">
-									<a href='#exampleModal' data-toggle='modal' class="modal_sel btn theme_btn button_hover" data-roomid='<?=$cid[$j];?>' data-roomname='<?=$cname[$j];?>' data-start='<?=$text1;?>' data-end='<?=$text2;?>' data-price='<?=$cprice[$j]?>' data-people='<?=$cpeople[$j];?>' data-pic='/~team4/room_img/<?=$cpic[$j];?>' data-username='<?=$this->session->userdata("name");?>' data-memberid='<?=$this->session->userdata("ID");?>'>Book Now</a>
+									<a href='#exampleModal' data-toggle='modal' class="modal_sel btn theme_btn button_hover" data-roomid='<?=$cid[$j];?>' data-roomname='<?=$cname[$j];?>' data-start='<?=$text1;?>' data-end='<?=$text2;?>' data-price='<?=$cprice[$j]?>' data-people='<?=$cpeople[$j];?>' data-pic='/~team4/room_img/<?=$cpic[$j];?>' data-username='<?=$this->session->userdata("name");?>' data-memberid='<?=$this->session->userdata("ID");?>'>예약하기</a>
 								</div>
 								<a href='#exampleModal' data-toggle='modal' class="modal_sel" data-roomid='<?=$cid[$j];?>' data-roomname='<?=$cname[$j];?>' data-start='<?=$text1;?>' data-end='<?=$text2;?>' data-price='<?=$cprice[$j]?>' data-pic='/~team4/room_img/<?=$cpic[$j];?>' data-people='<?=$cpeople[$j];?>' data-username='<?=$this->session->userdata("name");?>' data-memberid='<?=$this->session->userdata("ID");?>'><h4 class="sec_h4" ><?=$cname[$j]?></h4></a>
-								<h5><?$cprice[$j]?></h5>
+								<h5><?=number_format($cprice[$j])?>원</h5>
 							</div>
 						</div>
 					<?
@@ -261,10 +293,10 @@
 							<div class="accomodation_item text-center">
 								<div class="hotel_img">
 									<img src="/~team4/room_img/<?=$cpic[$j]?>" alt="" width="260" height="270">
-									<a href="#" class="btn theme_btn button_hover">Book Now</a>
+									<a href='#exampleModal' data-toggle='modal' class="modal_sel btn theme_btn button_hover" data-roomid='<?=$cid[$j];?>' data-roomname='<?=$cname[$j];?>' data-start='<?=$text1;?>' data-end='<?=$text2;?>' data-price='<?=$cprice[$j]?>' data-people='<?=$cpeople[$j];?>' data-pic='/~team4/room_img/<?=$cpic[$j];?>' data-username='<?=$this->session->userdata("name");?>' data-memberid='<?=$this->session->userdata("ID");?>'>예약하기</a>
 								</div>
-								<a href="#"><h4 class="sec_h4"><?=$cname[$j]?></h4></a>
-								<h5><?$cprice[$j]?></h5>
+								<a href='#exampleModal' data-toggle='modal' class="modal_sel" data-roomid='<?=$cid[$j];?>' data-roomname='<?=$cname[$j];?>' data-start='<?=$text1;?>' data-end='<?=$text2;?>' data-price='<?=$cprice[$j]?>' data-pic='/~team4/room_img/<?=$cpic[$j];?>' data-people='<?=$cpeople[$j];?>' data-username='<?=$this->session->userdata("name");?>' data-memberid='<?=$this->session->userdata("ID");?>'><h4 class="sec_h4" ><?=$cname[$j]?></h4></a>
+								<h5><?=number_format($cprice[$j])?>원</h5>
 							</div>
 						</div>
 					<?
@@ -325,10 +357,10 @@
 							<div class="accomodation_item text-center">
 								<div class="hotel_img">
 									<img src="/~team4/room_img/<?=$cpic[$j]?>" alt="" width="260" height="270">
-									<a href='#exampleModal' data-toggle='modal' data-name='<?=$cname[$j];?>' data-start='<?=$text1;?>' data-end='<?=$text2;?>' data-pic='/~team4/room_img/<?=$cpi[$j];?>' class="btn theme_btn button_hover">Book Now</a>
+									<a href='#exampleModal' data-toggle='modal' class="modal_sel btn theme_btn button_hover" data-roomid='<?=$cid[$j];?>' data-roomname='<?=$cname[$j];?>' data-start='<?=$text1;?>' data-end='<?=$text2;?>' data-price='<?=$cprice[$j]?>' data-people='<?=$cpeople[$j];?>' data-pic='/~team4/room_img/<?=$cpic[$j];?>' data-username='<?=$this->session->userdata("name");?>' data-memberid='<?=$this->session->userdata("ID");?>'>예약하기</a>
 								</div>
-								<a href='#exampleModal' data-toggle='modal'><h4 class="sec_h4"><?=$cname[$j];?></h4></a>
-								<h5><?$cprice[$j]?></h5>
+								<a href='#exampleModal' data-toggle='modal' class="modal_sel" data-roomid='<?=$cid[$j];?>' data-roomname='<?=$cname[$j];?>' data-start='<?=$text1;?>' data-end='<?=$text2;?>' data-price='<?=$cprice[$j]?>' data-pic='/~team4/room_img/<?=$cpic[$j];?>' data-people='<?=$cpeople[$j];?>' data-username='<?=$this->session->userdata("name");?>' data-memberid='<?=$this->session->userdata("ID");?>'><h4 class="sec_h4" ><?=$cname[$j]?></h4></a>
+								<h5><?=number_format($cprice[$j])?>원</h5>
 							</div>
 						</div>
 					<?
@@ -369,11 +401,13 @@
                 <div class="row">
                     <div class="col-md-7 d_flex">
                         <div class="about_content">
-                            <h2 class="title title_color" id="roomname">이코노미더블룸</h2>
+                            <h2 class="title title_color" id="roomname"></h2>
 							<br>
         <form name="form_booking" method="post" action="">
-			<input type="hidden" name="roomid" id="roomid" value="">
-			<input type="hidden" name="memberId" id="memberid" value="">
+			<input type="hidden" name="roomId" id="roomId" value="">
+			<input type="hidden" name="memberId" id="memberId" value="">
+			<input type="hidden" name="price" id="price" value="">
+			<input type="hidden" name="prices" id="prices" value="">
 
           <div class="form-inline">
             회&nbsp;&nbsp;원&nbsp;&nbsp;명 : &nbsp;&nbsp;
@@ -391,13 +425,13 @@
           </div>
 		  <div style="height:10px"></div>
           <div class="form-inline">
-            가&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;격 : &nbsp;&nbsp;
-            <input type="text" name="price" id="price" size="30" value="" class="form-control form-control-sm" readonly>
+            가격(1일) : &nbsp;&nbsp;
+            <input type="text" name="txtprice" id="txtprice" size="30" value="" class="form-control form-control-sm" readonly>
           </div>
 		  <div style="height:10px"></div>
           <div class="form-inline">
             예약인원 : &nbsp;&nbsp;
-            <select name="count" class="nice-select form-control form-control-sm">
+            <select name="count" id="count" class="nice-select form-control form-control-sm" onChange="javascript:select_people();">
 			</select>
 			</div>
 		</form>
@@ -408,14 +442,16 @@
                     </div>
                 </div>
             </div>
-      </div>	  
-      <div class="modal-footer alert-secondary" style="text-align:center">
-
-	  <div style="float:left;verticla-align:middle;">
-		총합 : 
-	  </div>
-        <button type="button" class="btn btn-sm btn-secondary" onclick="javascript:form_booking.submit();">예약</button>
-        <button type="button" class="btn btn-sm btn-light" data-dismiss="modal">닫기</button>
+      </div>
+      <div class="modal-footer alert-secondary" style="text-align:center;justify-content:space-between;padding-left:30px;padding-right:30px;">
+		<div id="txtprices" style="font-weight:bold;">
+			합계 : 
+		</div>
+		<div style="justify-content:flex-end;">
+			<button type="button" class="btn btn-sm btn-secondary" onclick="javascript:form_booking.submit();">예약</button>
+	        <button type="button" class="btn btn-sm btn-light" data-dismiss="modal">닫기</button>
+		</div>
+        
       </div>
     </div>
   </div>

@@ -12,32 +12,69 @@
 				});
 
 				$("#start") .on("dp.change", function (e){
-					find_text();
+					select_people();
 				});
 				$("#end") .on("dp.change", function (e){
-					find_text();
+					select_people();
 				});
 			});
 
+			
 			function select_room()
 			{
-				var frm = document.form1;
 				var str;
 				str = form1.sel_roomId.value;
-				form1.roomId.value = str[0];
+				form1.roomId.value = str[0];				
 				form1.count.options.length=0;
+
 				if(str=="")
 				{
-						form1.count.value="";
+					form1.count.value="";
+					form1.price.value = 0;
 				}
 				else
 				{					
-					str = str.split("^^");									
-					for(var i=1;i<=str[1];i++){
+					str = str.split("^^");	
+					form1.price.value = str[2];
+					for(var i=1;i<=parseInt(str[1])+1;i++){
 						form1.count.add(new Option(i+"명", i));
-					}									
+					}
 				}	
+				select_people();
+			}
+			function select_people(){
 				
+				var diff = new Date(form1.end.value) - new Date(form1.start.value);
+				var currDay = 24*60*60*1000;
+				var day = parseInt(diff/currDay);
+
+				var prices = parseInt(form1.price.value) * day;
+
+				
+				if (form1.count.value >= form1.count.options.length)
+				{
+					prices = prices + parseInt(prices/2);
+				}
+				
+				form1.prices.value = prices;
+				if (prices>0)
+				{
+					form1.txtprices.value = prices.toLocaleString() + '원';
+				}
+				else
+				{
+				form1.txtprices.value = '0원';
+				}
+
+				
+			}
+			window.onload = function(){
+				var str;
+				str = form1.sel_roomId.value;
+				form1.roomId.value = str[0];				
+				
+				str = str.split("^^");	
+				form1.price.value = str[2];
 			}
 		</script>
 		
@@ -63,7 +100,7 @@
 									<?
 										$roomId=set_value("roomId");
 										foreach($list1 as $row1){
-											$t1 = "$row1->ID^^$row1->people";
+											$t1 = "$row1->ID^^$row1->people^^$row1->price";
 											if($row1->ID==$row->roomId)
 												echo("<option value='$t1' selected>$row1->name</option>");
 											else
@@ -141,9 +178,9 @@
 						</td>
 						<td width="80%" align="left">
 							<div class="form-inline">
-								<select name="count" class="form-control form-control-sm">
+								<select name="count" class="form-control form-control-sm" onchange="select_people();">
 									<?
-										for($i=1; $i<($row->room_people + 1); $i++){
+										for($i=1; $i<=($row->room_people + 1); $i++){
 											if ($row->count == $i)
 												echo("<option value='$i' selected> $i 명</option>");
 											else
@@ -155,19 +192,16 @@
 							<? If (form_error("count")==true) echo form_error("count"); ?>
 						</td>
 					</tr>
+
+					<input type="hidden" name="price" value="">
+					<input type="hidden" name="prices" value="<?=$row->prices;?>">
 					<tr>
 						<td width="20%" class="mycolor2" style="vertical-align:middle">
-							예약 yes/no
+							가격
 						</td>
-						<td width="80%" align="right">
+						<td width="80%" align="left">
 							<div class="form-inline">
-			<? if($row->reserve==0) { ?>
-								<input type="radio" name="reserve" value="1"> Yes &nbsp;&nbsp;
-								<input type="radio" name="reserve" value="0" checked> No
-			<? } else { ?>
-								<input type="radio" name="reserve" value="1" checked> Yes &nbsp;&nbsp;								
-								<input type="radio" name="reserve" value="0" > No
-			<? } ?>
+								<input type="text" name="txtprices" value="<?=number_format($row->prices);?>원" class="form-control form-control-sm" readonly/>
 							</div>
 						</td>
 					</tr>

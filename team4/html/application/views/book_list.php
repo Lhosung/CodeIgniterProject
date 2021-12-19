@@ -78,8 +78,8 @@
 						<th>Member</th>
 						<th>StartDay</th>
 						<th>EndDay</th>
-						<th>Reserve</th>
 						<th>Count</th>
+						<th>Prices</th>
 					</tr>
 				</thead>
 				<tfoot>
@@ -89,8 +89,8 @@
 						<th>회원명</th>
 						<th>체크인</th>
 						<th>체크아웃</th>
-						<th>예약 yes/no</th>
 						<th>예약인원</th>
+						<th>가격</th>
 					</tr>
 				</tfoot>
 				<tbody>
@@ -105,13 +105,8 @@
 						<td><?=$row->member_name; ?></td>
 						<td><?=$row->start?></td>						
 						<td><?=$row->end;?></td>
-						<td>
-							<?
-								if ($row->reserve == 0){ echo("no");}
-								else {echo("yes");}
-							?>
-						</td>
 						<td><?=$row->count;?>명</td>
+						<td><?=number_format($row->prices);?>원</td>
 					</tr>
 <?
     }

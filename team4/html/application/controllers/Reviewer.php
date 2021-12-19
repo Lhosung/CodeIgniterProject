@@ -1,14 +1,14 @@
 <?
 /**
-	날짜(수정일) : 2021.12.16
+	날짜(수정일) : 2021.12.18
 	만든 이 : 한정수
 */
-    class Review extends CI_Controller {				// review클래스 선언
+    class Reviewer extends CI_Controller {				// reviewuser 클래스 선언
         function __construct()                           // 클래스생성할 때 초기설정
         {
             parent::__construct();
             $this->load->database();                     // 데이터베이스 연결
-            $this->load->model("review_m");				 // 모델 review_m 연결
+            $this->load->model("reviewer_m");				 // 모델 reviewer_m 연결
 			$this->load->helper(array("url","date"));	// 헬퍼등록
 			$this->load->library("pagination");
 			$this->load->library('upload');				// 사진 업로드 선언
@@ -16,7 +16,6 @@
 			
 			date_default_timezone_set("Asia/Seoul");    // 지역설정
 			$today=date("Y-m-d");
-
         }
 
         public function index()                         // 제일 먼저 실행되는 함수
@@ -29,14 +28,15 @@
 			$uri_array=$this->uri->uri_to_assoc(3);
 			$text1 = array_key_exists("text1",$uri_array) ? urldecode($uri_array["text1"]) : date("Y-m-d",strtotime("-1 month")) ;
 			$text2 = array_key_exists("text2",$uri_array) ? urldecode($uri_array["text2"]) : date("Y-m-d") ;
+			$page = array_key_exists("page",$uri_array) ? "/page/" . urldecode($uri_array["page"]) : 0 ;
 
-			$base_url = "/review/lists/text1/$text1/text2/$text2/page";    // $page_segment = 6;
+			$base_url = "/reviewer/lists/text1/$text1/text2/$text2/page";    // $page_segment = 6;
 			$page_segment = substr_count( substr($base_url,0,strpos($base_url,"page")) , "/" )+1;
 
 			$base_url = "/~team4" . $base_url;
 
 			$config["per_page"]	 = 5;                              // 페이지당 표시할 line 수
-			$config["total_rows"] = $this->review_m->rowcount($text1, $text2);  // 전체 레코드개수 구하기
+			$config["total_rows"] = $this->reviewer_m->rowcount($text1, $text2);  // 전체 레코드개수 구하기
 			$config["uri_segment"] = $page_segment;		 // 페이지가 있는 segment 위치
 			$config["base_url"]	 = $base_url;                // 기본 URL
 			$this->pagination->initialize($config);           // pagination 설정 적용
@@ -49,30 +49,12 @@
 
 			$data["text1"]=$text1;
 			$data["text2"]=$text2;
-			$data["list"] = $this->review_m->getlist($text1,$text2,$start,$limit);   // 해당페이지 자료읽기
+			$data["list"] = $this->reviewer_m->getlist($text1,$text2,$start,$limit);   // 해당페이지 자료읽기
 
-            $this->load->view("admin_header");                    // 상단출력(메뉴)
-            $this->load->view("review_list",$data);           // review_list에 자료전달
-            $this->load->view("admin_footer");                      // 하단 출력 
+            $this->load->view("main_header");                    // 상단출력(메뉴)
+            $this->load->view("reviewer_list",$data);           // review_list에 자료전달
+            $this->load->view("main_footer");                      // 하단 출력 
         }
-
-		public function view()
-		{
-			$uri_array=$this->uri->uri_to_assoc(3);
-			$ID	= array_key_exists("ID",$uri_array) ? $uri_array["ID"] : "" ;
-			$text1 = array_key_exists("text1",$uri_array) ? urldecode($uri_array["text1"]) : date("Y-m-d",strtotime("-1 month")) ;
-			$text2 = array_key_exists("text2",$uri_array) ? urldecode($uri_array["text2"]) : date("Y-m-d") ;
-			$page = array_key_exists("page",$uri_array) ? urldecode($uri_array["page"]) : 0 ;
-
-			$data["text1"]=$text1;                      // text1 값 전달을 위한 처리
-			$data["text2"]=$text2;						 // text2 값 전달을 위한 처리
-			$data["page"]=$page;
-			$data["row"]=$this->review_m->getrow($ID);
-
-			$this->load->view("admin_header");                    // 상단출력(메뉴)
-            $this->load->view("review_view", $data);           // review_list에 자료전달
-            $this->load->view("admin_footer"); 
-		}
 
 		public function add()
 		{
@@ -83,14 +65,15 @@
 
 			$this->load->library("form_validation");
 			$this->form_validation->set_rules("userNameNum","유저이름","required");
-			$this->form_validation->set_rules("day","날짜","required");
+
+			$uid=$this->session->userdata("uid");
 
 			if ($this->form_validation->run()==FALSE)
 			{ 
-				$this->load->view("admin_header");
-				$data["userList"]=$this->review_m->getUserList();
-				$this->load->view("review_add", $data);    // 입력화면 표시
-				$this->load->view("admin_footer");
+				$this->load->view("main_header");
+				$data["row"]=$this->reviewer_m->getrowUser($uid);
+				$this->load->view("reviewer_add", $data);    // 입력화면 표시
+				$this->load->view("main_footer");
 			}
 			else              // 입력화면의 저장버튼 클릭한 경우
 			{				
@@ -103,9 +86,10 @@
 				);
 				$picname = $this->call_upload();
 				if($picname) $data["pic"] = $picname;
-				$this->review_m->insertrow($data); 
 
-				redirect("/~team4/review/lists" . $text1 . $text2 . $page);    //   목록화면으로 이동.
+				$this->reviewer_m->insertrow($data); 
+
+				redirect("/~team4/reviewer/lists" . $text1 . $text2 . $page);    //   목록화면으로 이동.
 			}
 		}
 
@@ -117,7 +101,7 @@
 			$text2 = array_key_exists("text2",$uri_array) ? "/text2/" . urldecode($uri_array["text2"]) : "" ;
 			$page = array_key_exists("page",$uri_array) ? "/page/" . urldecode($uri_array["page"]) : "" ;
 
-			$this->review_m->deleterow($ID);
+			$this->reviewer_m->deleterow($ID);
 			redirect("/~team4/review/lists" . $text1 . $text2 . $page);    //   목록화면으로 이동.
 
 		}
@@ -136,11 +120,11 @@
 
 			if ( $this->form_validation->run()==FALSE )     // 수정버튼 클릭한 경우
 			{
-				$data["list"] = $this->review_m->getUserList();
-				$this->load->view("admin_header");
-				$data["row"] = $this->review_m->getrow($ID);
+				$data["list"] = $this->reviewer_m->getUserList();
+				$this->load->view("main_header");
+				$data["row"] = $this->reviewer_m->getrow($ID);
 				$this->load->view("review_edit", $data);
-				$this->load->view("admin_footer");
+				$this->load->view("main_footer");
 			}
 			else           // 저장버튼 클릭한 경우
 			{  	
@@ -153,7 +137,7 @@
 				);
 				$picname = $this->call_upload();
 				if($picname) $data["pic"] = $picname;
-				$result = $this->review_m->updaterow($data, $ID);
+				$result = $this->reviewer_m->updaterow($data, $ID);
 
 				redirect("/~team4/review/lists" . $text1 . $text2. $page);
 			}

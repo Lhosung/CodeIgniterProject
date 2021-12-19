@@ -47,24 +47,20 @@
 					</tr>
 					<tr>
 						<td width="20%" class="mycolor2" style="vertical-align:middle">
-							 예약 yes/no
-						</td>
-						<td width="80%" align="left">
-							<?
-								if ($row->reserve == 0){ echo("No");}
-								else {echo("Yes");}
-							?>
-						</td>
-					</tr>
-					<tr>
-						<td width="20%" class="mycolor2" style="vertical-align:middle">
 							 예약인원
 						</td>
 						<td width="80%" align="left">
 							<?=$row->count; ?>명
 						</td>
 					</tr>
-
+					<tr>
+						<td width="20%" class="mycolor2" style="vertical-align:middle">
+							 가격
+						</td>
+						<td width="80%" align="left">
+							<?=number_format($row->prices); ?>원
+						</td>
+					</tr>
 				</table>
 				<div align="center">
 					<a href="/~team4/book/edit<?=$tmp; ?>" class="btn btn-sm mycolor1">수정</a>

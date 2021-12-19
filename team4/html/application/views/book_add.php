@@ -12,10 +12,10 @@
 				});
 
 				$("#start") .on("dp.change", function (e){
-					find_text();
+					select_people();
 				});
 				$("#end") .on("dp.change", function (e){
-					find_text();
+					select_people();
 				});
 			});
 
@@ -24,22 +24,53 @@
 				var frm = document.form1;
 				var str;
 				str = form1.sel_roomId.value;
-				form1.roomId.value = str[0];
+				form1.roomId.value = str[0];				
 				form1.count.options.length=0;
+
 				if(str=="")
 				{
-						form1.count.value="";
+					form1.count.value="";
+					form1.price.value = 0;
 				}
 				else
 				{					
-					str = str.split("^^");									
-					for(var i=1;i<=str[1];i++){
+					str = str.split("^^");	
+					form1.price.value = str[2];
+					for(var i=1;i<=parseInt(str[1])+1;i++){
 						form1.count.add(new Option(i+"명", i));
-					}									
+					}
 				}	
+				select_people();
+			}
+			function select_people(){
+				
+				var diff = new Date(form1.end.value) - new Date(form1.start.value);
+				var currDay = 24*60*60*1000;
+				var day = parseInt(diff/currDay);
+
+				var prices = parseInt(form1.price.value) * day;
+
+				
+				if (form1.count.value >= form1.count.options.length)
+				{
+					prices = prices + parseInt(prices/2);
+				}
+				
+				form1.prices.value = prices;
+				if (prices>0)
+				{
+					form1.txtprices.value = prices.toLocaleString() + '원';
+				}
+				else
+				{
+				form1.txtprices.value = '0원';
+				}	
+			}
+				window.onload = function(){
+				var date = new Date();
+				form1.end.value = date.getFullYear() + '-' + (parseInt(date.getMonth())+1) + '-' + (parseInt(date.getDate())+1);
 				
 			}
-
 		</script>
 		
 		<br>
@@ -60,7 +91,7 @@
 									<?
 										$roomId=set_value("roomId");
 										foreach($list1 as $row1){
-											$t1 = "$row1->ID^^$row1->people";
+											$t1 = "$row1->ID^^$row1->people^^$row1->price";
 											if($row1->ID==$roomId)
 												echo("<option value='$t1' selected>$row1->name</option>");
 											else
@@ -138,13 +169,26 @@
 						</td>
 						<td width="80%" align="left">
 							<div class="form-inline">
-								<select name="count" class="form-control form-control-sm">
+								<select name="count" class="form-control form-control-sm" onchange="select_people();">
 								</select>
 							</div>
 							<? If (form_error("count")==true) echo form_error("count"); ?>
 						</td>
 					</tr>
 
+					<input type="hidden" name="price">
+					<input type="hidden" name="prices">
+					<tr>
+						<td width="20%" class="mycolor2" style="vertical-align:middle">
+							가격
+						</td>
+						<td width="80%" align="left">
+							<div class="form-inline">
+								<input type="text" name="txtprices" value="<?=set_value("txtprices"); ?>" class="form-control form-control-sm" readonly/>
+							</div>
+							<? if (form_error("prices")==true) echo form_error("prices"); ?>
+						</td>
+					</tr>
 				</table>
 				<div align="center">
 					<input type="submit" value="저장" class="btn btn-sm mycolor1" /> &nbsp;

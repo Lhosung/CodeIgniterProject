@@ -17,6 +17,8 @@
         <!-- main css -->
         <link rel="stylesheet" href="/~team4/my/css/style.css">
         <link rel="stylesheet" href="/~team4/my/css/responsive.css">
+
+		<link rel="stylesheet" href="/~team4/my/css/my.css">
     </head>
     <body>
         <!--================Header Area =================-->
@@ -41,7 +43,7 @@
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">소셜</a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item active"><a class="nav-link" href="/~team4/gallery/user">갤러리</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="/~team4/review">리뷰</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/~team4/reviewer">리뷰</a></li>
                                 </ul>
                             </li>
 <?
@@ -91,7 +93,7 @@
 
         <!--================Breadcrumb Area =================-->
         <section class="gallery_area section_gap">
-            <div class="container">
+            <div class="container-fluid">
 					<div class="section_title text-center">
 						<h2 class="title_color">호텔 갤러리</h2>
 						<p>친환경 시스템이 마음 속에 깃들여 있는 우리 호텔 갤러리입니다.</p>
@@ -107,8 +109,8 @@
 		$caTmi[] = $row->tmi;
 	}	
 ?>
-	<!-- 화면 carousel-->
-			<div id="carouselExampleIndicators3" class="carousel carousel-dark slide" data-bs-ride="carousel" data-interval="5000">
+	<!-- 화면 carousel3-->
+			<div id="carouselGallery3" class="carousel carousel-dark slide" data-bs-ride="carousel" data-interval="5000" >
 				<div class="carousel-inner">
 <?
 	if($row_count == 0) {
@@ -129,17 +131,18 @@
 				$row_mod = $row_count % $limit;
 			}
 ?>
-					<div class="carousel-item <? if($i == 0) {echo("active");} ?>" >
+					<div class="carousel-item <? if($i == 0) {echo("active");} ?>" style=" text-align: center;">
 						<div class="container">
+						<div class="row" display:flex="disabled">
 <?
 			for($j = $i*$limit; $j < ($i*$limit) + $row_mod; $j++) {
 ?>
-					
+					<div class="col-lg">
 							<div class="<? if($j == $i*$limit) echo("gallery-item-first"); else echo("gallery-item");?>">
 								
-								<div class="row" style="justify-content: space-around;">
+								
 
-									<div class="col-lg-4">
+									
 										<div class="categories_post">
 											<a href="javascript:find_gallery('<?=$caID[$j]; ?>');">
 											<img src="/~team4/category_img/<?=$caPic[$j]; ?>" alt="post">
@@ -155,11 +158,12 @@
 									</div>
 
 								</div>
-							</div>
+							
 						
 <?
 			}
 ?>
+	</div>
 						</div>
 					</div>
 <?
@@ -171,11 +175,11 @@
 <?
 	if($row_count > 0) {
 ?>
-				  <a class="carousel-control-prev" href="#carouselExampleIndicators3" role="button" data-slide="prev">
+				  <a class="carousel-control-prev" href="#carouselGallery3" role="button" data-slide="prev">
 					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 					<span class="sr-only">Previous</span>
 				  </a>
-				  <a class="carousel-control-next" href="#carouselExampleIndicators3" role="button" data-slide="next">
+				  <a class="carousel-control-next" href="#carouselGallery3" role="button" data-slide="next">
 					<span class="carousel-control-next-icon" aria-hidden="true"></span>
 					<span class="sr-only">Next</span>
 				  </a>
@@ -183,7 +187,174 @@
 	}
 ?>
 				</div>
-	<!-- 화면 carousel-->
+	<!-- 화면 carousel3-->
+
+	<!-- 화면 carousel2-->
+			<div id="carouselGallery2" class="carousel carousel-dark slide" data-bs-ride="carousel" data-interval="5000" >
+				<div class="carousel-inner">
+<?
+	if($row_count == 0) {
+		echo("<div class='carousel-item active'>
+				<div style='float:center;'>
+					<div class='accomodation_item text-center'>
+						<h5> 카테고리가 없습니다. </h5>
+					</div>
+				</div>
+			</div>
+		");
+	}
+	else {			
+		$limit = 2;
+		$row_mod = $limit;
+		for($i=0; $i < ($row_count/$limit); $i++) {
+			
+			if( $i+1 > ($row_count/$limit)) {
+				$row_mod = $row_count % $limit;
+			}
+?>
+					<div class="carousel-item <? if($i == 0) {echo("active");} ?>" style=" text-align: center;">
+						<div class="container">
+						<div class="row" style="justify-content:flex-center;">
+						<div class="col-lg-2"></div>
+<?
+			for($j = $i*$limit; $j < ($i*$limit) + $row_mod; $j++) {
+?>
+					<div class="col-lg">
+							<div class="<? if($j == $i*$limit) echo("gallery-item-first"); else echo("gallery-item");?>">
+								
+								
+
+									
+										<div class="categories_post">
+											<a href="javascript:find_gallery('<?=$caID[$j]; ?>');">
+											<img src="/~team4/category_img/<?=$caPic[$j]; ?>" alt="post">
+											<div class="categories_details">
+												<div class="categories_text">
+														<h5><?=$caName[$j]; ?></h5>
+													<div class="border_line"></div>
+													<p><?=$caTmi[$j]; ?></p>
+												</div>
+											</div>
+											</a>
+										</div>
+									</div>
+
+								</div>
+							
+						
+<?
+			}
+?>
+	<div class="col-lg-2"></div>
+	</div>
+						</div>
+					</div>
+<?
+		}
+	}
+?>
+				  </div>
+
+<?
+	if($row_count > 0) {
+?>
+				  <a class="carousel-control-prev" href="#carouselGallery2" role="button" data-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				  </a>
+				  <a class="carousel-control-next" href="#carouselGallery2" role="button" data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				  </a>
+<?
+	}
+?>
+				</div>
+	<!-- 화면 carousel2-->
+
+
+	<!-- 화면 carousel1-->
+			<div id="carouselGallery1" class="carousel carousel-dark slide" data-bs-ride="carousel" data-interval="5000" >
+				<div class="carousel-inner">
+<?
+	if($row_count == 0) {
+		echo("<div class='carousel-item active'>
+				<div style='float:center;'>
+					<div class='accomodation_item text-center'>
+						<h5> 카테고리가 없습니다. </h5>
+					</div>
+				</div>
+			</div>
+		");
+	}
+	else {			
+		$limit = 1;
+		$row_mod = $limit;
+		for($i=0; $i < ($row_count/$limit); $i++) {
+			
+			if( $i+1 > ($row_count/$limit)) {
+				$row_mod = $row_count % $limit;
+			}
+?>
+					<div class="carousel-item <? if($i == 0) {echo("active");} ?>" style=" text-align: center;">
+						<div class="container">
+						<div class="row" style="justify-content:flex-center;">
+						<div class="col-lg-2"></div>
+<?
+			for($j = $i*$limit; $j < ($i*$limit) + $row_mod; $j++) {
+?>
+					<div class="col-lg">
+							<div class="<? if($j == $i*$limit) echo("gallery-item-first"); else echo("gallery-item");?>">
+								
+								
+
+									
+										<div class="categories_post">
+											<a href="javascript:find_gallery('<?=$caID[$j]; ?>');">
+											<img src="/~team4/category_img/<?=$caPic[$j]; ?>" alt="post">
+											<div class="categories_details">
+												<div class="categories_text">
+														<h5><?=$caName[$j]; ?></h5>
+													<div class="border_line"></div>
+													<p><?=$caTmi[$j]; ?></p>
+												</div>
+											</div>
+											</a>
+										</div>
+									</div>
+
+								</div>
+							
+						
+<?
+			}
+?>
+	<div class="col-lg-2"></div>
+	</div>
+						</div>
+					</div>
+<?
+		}
+	}
+?>
+				  </div>
+
+<?
+	if($row_count > 0) {
+?>
+				  <a class="carousel-control-prev" href="#carouselGallery1" role="button" data-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				  </a>
+				  <a class="carousel-control-next" href="#carouselGallery1" role="button" data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				  </a>
+<?
+	}
+?>
+				</div>
+	<!-- 화면 carousel1-->
 						</form>
 					<!--================ Categorie Area =================-->
                 </div>

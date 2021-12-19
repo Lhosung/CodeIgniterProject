@@ -6,7 +6,6 @@
 				form1.submit();
 			}
 
-
 			$(function(){
 				$("#text1") .datetimepicker({
 					locale: 'ko',
@@ -95,7 +94,7 @@
 <?
     foreach ($list as $row)                             // 연관배열 list를 row를 통해 출력한다.
     {
-        $ID=$row->ID;                                 // 사용자번호
+        $ID=$row->ID;                                 // 리뷰 번호
 ?>
 					<tr>
 						<td><?=$ID; ?></td>

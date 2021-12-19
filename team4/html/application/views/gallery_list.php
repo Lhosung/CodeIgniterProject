@@ -16,7 +16,7 @@
 	$tmp = $text1 ? "/text1/$text1/page/$page" : "/page/$page";
 ?>
         <form name="form1" method="post" action="">
-            <div class="row">
+            <div class="row" display:flex="disabled">
                 <div class="col-6" align="left">            
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend">

@@ -15,8 +15,12 @@
 		
 		public function loginForm()                      // 제일 먼저 실행되는 함수
 		{
+			$uri_array=$this->uri->uri_to_assoc(3);
+			$error = array_key_exists("error",$uri_array) ? urldecode($uri_array["error"]) : "not" ;
+			
+			$data["error"]=$error;
 			$this->load->view("main_header");		// view폴더의 header.php 와
-			$this->load->view("loginForm");
+			$this->load->view("loginForm", $data);
 			$this->load->view("main_footer");		//  footer.php 호출
 		}
 	
@@ -37,9 +41,7 @@
 				$this->session->set_userdata($data);
 				
 
-				$this->load->view("main_header");
-				$this->load->view("index");
-				$this->load->view("main_footer");
+				redirect("/~team4/Main");
 			}
 			else{
 				$this->load->view("main_header");
@@ -53,9 +55,7 @@
 			$data=array('ID','name','uid','rank');
 			$this->session->unset_userdata($data);
 
-			$this->load->view("main_header");
-			$this->load->view("index");
-			$this->load->view("main_footer");
+			redirect("/~team4/Main");
 		}
 	}
 ?>

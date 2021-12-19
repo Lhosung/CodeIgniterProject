@@ -23,7 +23,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         <script src="/~team4/my/js/bootstrap.min.js"></script>
         <script src="/~team4/my/vendors/owl-carousel/owl.carousel.min.js"></script>
         <script src="/~team4/my/js/jquery.ajaxchimp.min.js"></script>
-<!-- select관련        <script src="/~team4/my/vendors/nice-select/js/jquery.nice-select.js"></script> --->
+		<script src="/~team4/my/vendors/nice-select/js/jquery.nice-select.js"></script>
         <script src="/~team4/my/js/mail-script.js"></script>
         <script src="/~team4/my/js/stellar.js"></script>
         <script src="/~team4/my/vendors/lightbox/simpleLightbox.min.js"></script>

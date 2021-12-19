@@ -18,8 +18,8 @@
         public function lists()
         {
 			$uri_array=$this->uri->uri_to_assoc(3);
-			$text1 = array_key_exists("text1",$uri_array) ? urldecode($uri_array["text1"]) : date("Y-m-d",strtotime("-1 month")) ;
-			$text2 = array_key_exists("text2",$uri_array) ? urldecode($uri_array["text2"]) : date("Y-m-d") ;
+			$text1 = array_key_exists("text1",$uri_array) ? urldecode($uri_array["text1"]) : date("Y-m-d") ;
+			$text2 = array_key_exists("text2",$uri_array) ? urldecode($uri_array["text2"]) : date("Y-m-d",strtotime("+1 month")) ;
 
 			$base_url = "/book/lists/text1/$text1/text2/$text2/page";    // $page_segment = 6;
 			$page_segment = substr_count( substr($base_url,0,strpos($base_url,"page")) , "/" )+1;
@@ -73,6 +73,7 @@
 
 			$this->load->library("form_validation");
 			$this->form_validation->set_rules("roomId","방이름","required");
+			$this->form_validation->set_rules("memberId","회원명","required");
 
 			if ($this->form_validation->run()==FALSE)
 			{ 
@@ -87,8 +88,8 @@
 					"memberId" => $this->input->post("memberId",TRUE),
 					"start" => $this->input->post("start",TRUE),
 					"end" => $this->input->post("end",TRUE),
-					"reserve" => 0,
-					"count" => $this->input->post("count",TRUE)
+					"count" => $this->input->post("count",TRUE),
+					"prices" => $this->input->post("prices",TRUE)
 				);
 
 				$this->book_m->insertrow($data); 
@@ -139,8 +140,8 @@
 					"memberId" => $this->input->post("memberId",TRUE),
 					"start" => $this->input->post("start",TRUE),
 					"end" => $this->input->post("end",TRUE),
-					"reserve" => $this->input->post("reserve",TRUE),
-					"count" => $this->input->post("count",TRUE)
+					"count" => $this->input->post("count",TRUE),
+					"prices" => $this->input->post("prices",TRUE)
 				);
 
 				$result = $this->book_m->updaterow($data,$ID);

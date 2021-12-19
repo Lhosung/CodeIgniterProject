@@ -34,6 +34,9 @@
 }
 #carouselExampleIndicators2{	display:none; }
 #carouselExampleIndicators1 { display:none; }
+#carouselGallery2 { display:none;}
+#carouselGallery1 { display:none; }
+
 
 .room-item{
 	float:left;
@@ -45,11 +48,19 @@
 	#carouselExampleIndicators2{ display:block;	}
 	.room-item-first{ margin-left:180px; }
 }
+@media (max-width: 1400px){
+	#carouselGallery1 { display:none; }
+	#carouselGallery3 { display:none; }
+	#carouselGallery2 { display:block;}
+}
 
 @media (max-width: 992px){
 	#carouselExampleIndicators2 { display:none; }
 	#carouselExampleIndicators3{ display:none; }
 	#carouselExampleIndicators1{ display:block;	}
+	#carouselGallery1 { display:block;}
+	#carouselGallery3 { display:none;}
+	#carouselGallery2 { display:none;}
 	.room-item-first{
 		width:100%;
 		margin-left:0px;

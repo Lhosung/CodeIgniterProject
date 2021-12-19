@@ -3,10 +3,10 @@
             <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
             <div class="container">
                 <div class="page-cover text-center">
-                    <h2 class="page-cover-tittle">About Us</h2>
+                    <h2 class="page-cover-tittle">Induk Royal</h2>
                     <ol class="breadcrumb">
-                        <li><a href="index.html">Home</a></li>
-                        <li class="active">About</li>
+                        <li><a href="main">메인</a></li>
+                        <li class="active">리조트 소개</li>
                     </ol>
                 </div>
             </div>
@@ -19,8 +19,8 @@
                 <div class="row">
                     <div class="col-md-6 d_flex align-items-center">
                         <div class="about_content ">
-                            <h2 class="title title_color">About Us <br>Our History<br>Mission & Vision</h2>
-                            <p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women, our behavior on the job is beyond reproach. inappropriate behavior is often laughed.</p>
+                            <h2 class="title title_color" align="center">Induk Royal<br>"특별한 휴식을 위하여"<br>힐링 & 휴식</h2>
+                            <p>고품격 Refresh를 제공하는 생활 속의 리조트를 컨셉으로 개발된 "Induk Royal"은 다양하고 독특한 시설을 갖춘 사계절 종합리조트입니다.</p>
                             <a href="#" class="button_hover theme_btn_two">Request Custom Price</a>
                         </div>
                     </div>
@@ -38,44 +38,44 @@
             </div>
             <div class="container">
                 <div class="section_title text-center">
-                    <h2 class="title_w">Royal Facilities</h2>
-                    <p>Who are in extremely love with eco friendly system.</p>
+                    <h2 class="title_w">편의시설</h2>
+                    <p>Induk Royal만의 시설</p>
                 </div>
                 <div class="row mb_30">
                     <div class="col-lg-4 col-md-6">
                         <div class="facilities_item">
-                            <h4 class="sec_h4"><i class="lnr lnr-dinner"></i>Restaurant</h4>
-                            <p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+                            <h4 class="sec_h4"><i class="lnr lnr-dinner"></i>레스토랑</h4>
+                            <p>최고의 셰프들이 만들어주는 양식 뷔페를 먹고 기분 좋은 아침을 시작하세요.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="facilities_item">
-                            <h4 class="sec_h4"><i class="lnr lnr-bicycle"></i>Sports CLub</h4>
-                            <p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+                            <h4 class="sec_h4"><i class="lnr lnr-bicycle"></i>헬스 클럽</h4>
+                            <p>여행와서 근손실 걱정하는 당신을 위한 맞춤공간!</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="facilities_item">
-                            <h4 class="sec_h4"><i class="lnr lnr-shirt"></i>Swimming Pool</h4>
-                            <p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+                            <h4 class="sec_h4"><i class="lnr lnr-shirt"></i>인피니티 풀</h4>
+                            <p>일상에서 벗어나 자연에서 즐기는 인피니티풀</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="facilities_item">
-                            <h4 class="sec_h4"><i class="lnr lnr-car"></i>Rent a Car</h4>
-                            <p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+                            <h4 class="sec_h4"><i class="lnr lnr-car"></i>발렛파킹</h4>
+                            <p>수준급의 기사님들이 차를 대기시키고 주차시켜드립니다.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="facilities_item">
-                            <h4 class="sec_h4"><i class="lnr lnr-construction"></i>Gymnesium</h4>
-                            <p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+                            <h4 class="sec_h4"><i class="lnr lnr-coffee-cup"></i>카페</h4>
+                            <p>편안한 분위기와 깔끔하고 고급스러운 원두를 사용한 카페</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="facilities_item">
-                            <h4 class="sec_h4"><i class="lnr lnr-coffee-cup"></i>Bar</h4>
-                            <p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+                            <h4 class="sec_h4"><i class="lnr lnr-construction"></i>바 & 라운지</h4>
+                            <p>연인과 함께 편안하게 술과 음악을 즐길수 있는 바 & 라운지</p>
                         </div>
                     </div>
                 </div>

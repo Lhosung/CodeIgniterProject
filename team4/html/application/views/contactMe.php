@@ -31,6 +31,25 @@
 				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 				</script>
 				<br/>
+				<!--================학번,이름=================-->
+				<div style="padding:30px;"></div>
+				<div class="d-flex justify-content-around">
+					<h1>
+						<a href="#" class="genric-btn danger circle" margin-right="10px">201712046<br>한정수</br></a>
+					</h1>
+					<h1>
+						<a href="#" class="genric-btn success circle">201812044<br>임호성</br></a>
+					</h1>	
+					<h1>
+						<a href="#" class="genric-btn info circle">2016120691<br>전영준</br></a>
+					</h1>
+					<h1>
+						<a href="#" class="genric-btn primary circle">201718048<br>유재우</br></a>
+					</h1>
+				</div>
+				<div style="padding:30px;"></div>
+				<!--================학번,이름=================-->
+
 				<div class="row">
                     <div class="col-md-3">
                         <div class="contact_info">
